@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link rel="stylesheet" href="../lib/css/bootstrap.css">
+<script src="../lib/js/jquery.js"></script>
+<script src="../lib/js/angular.js"></script>
+<body>
+    <div id="a1"></div>
+
+
+    <div ng-controller="ParentCtrl">
+
+        <div ng-controller="SelfCtrl">
+            <a class="btn" ng-click="click()">click me</a>
+            <div ng-controller="ChildCtrl"></div>
+        </div>
+
+        <div ng-controller="BroCtrl"></div>
+
+    </div>
+
+    <script>
+
+        var app=angular.module('myApp', ['ng']);
+        app.controller('ParentCtrl', function($scope) {
+            $scope.$on('to-child', function(e, d) {     //接收事件 to-child  false
+                console.log(1);
+            });
+            $scope.$on('to-parent', function(e, d) {    //接收事件 to-parent true
+                console.log("我是parent，我得到了",d);
+            });
+        })
+
+        .controller('SelfCtrl', function($scope) {
+            $scope.click = function () {
+                $scope.$broadcast('to-child', '信号1');  //$broadcast发送事件 to-chidl
+                $scope.$emit('to-parent', '信号2');      //$emit发送事件 to-parent
+            }
+        })
+
+        .controller('ChildCtrl', function($scope){
+            $scope.$on('to-child', function(e, d) {     //接收事件 to-child  true
+                console.log('我是ChildCtrl，我得到了', d);
+            });
+            $scope.$on('to-parent', function(e, d) {     //接收事件 to-paerent false
+                console.log(2);
+            });
+        })
+
+        .controller('BroCtrl', function($scope){
+            $scope.$on('to-child', function(e, d) {      //接收事件 to-child  false
+                console.log(3);
+            });
+            $scope.$on('to-parent', function(e, d) {     //接收事件 to-paernt  false
+                console.log(4);
+            });
+        });
+//broadcast 只能向下发送事件 也就是他的作用于内的可以接受到 兄弟级接收不到
+//emit      只能向上发送事件 也就是他的父级作用域可以接受到 兄弟级接收不到
+//on        接收事件
+    </script>
+</body>
+</html>

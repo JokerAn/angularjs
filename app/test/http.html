@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="../lib/js/jquery.js"></script>
+<script src="../lib/js/angular.js"></script>
+<script src="../lib/js/angular-route.js"></script>
+<body ng-controller="customersCtrl">
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('customersCtrl', function($scope, $http) {
+        $http.get("a.json")
+              //.success(function (res) {console.log(res.data.sites[0].Name)});
+                //success  error  在新版本被取消了 替换成 params  then 了
+                .then(function (res) {console.log(res.data.sites[0].Name)});
+
+//下面是正确版本  url是错误的但格式是正确的
+        /*$http.get('/api/user/showname2', {
+            params: {
+                name: '张三',
+                age: 'abc'
+            }
+        }).then(function (result) {  //正确请求成功时处理
+            console.info(result);
+            alert(result.data);
+        }).catch(function (result) { //捕捉错误处理
+            console.info(result);
+            alert(result.data.Message);
+        });*/
+    });
+
+
+
+</script>
+</body>
+</html>

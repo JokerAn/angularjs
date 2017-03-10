@@ -4,7 +4,895 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<script src="lib/js/jquery.js"></script>
 <body>
-    <p>hellow</p>
+<h1>angular全在test文件夹中   index中是杂记</h1>
+    <button>按钮弹出小窗口</button>
+    <script>
+        $("button").click(function(){
+            window.open("http://www.w3school.com.cn",
+                    "_blank",
+                    "toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=400, height=400")
+        })
+    </script>
+    <script>
+        'use strict';
+
+        /* Directives */
+
+
+        angular.module('proApp.directives', []).
+        directive('appVersion', ['version', function(version) {
+            return function(scope, elm, attrs) {
+                elm.text(version);
+            };
+        }])
+
+        //公共删除模态框组件
+                .directive('myPrompt1',function(){
+                    return {
+                        restrict: 'EA',
+                        template:'<div ng-show="myPrompt1"   class="xxtsk" >'+
+                        '<div>'+
+                        '    <p class="xxtsktop  s-mttop ">'+
+                        '        删除数据'+
+                        '        <button class="xxtskgb" ng-click="xxtskbtn1()">'+
+                        '            <img src="img/a-gb.png" alt="">'+
+                        '        </button>'+
+                        '    </p>'+
+                        '    <div  style="margin: 12% 0  0  38%;">'+
+                        '    <p class="s-ts1" style=" font-weight: 900; font-size:14px !important; margin-bottom: 10px;">是否确认对信息的删除？</p>'+
+                        '    <p class="s-ts2">如果是请点击确定按钮，否则请点取消。</p>'+
+                        '    </div>'+
+                        '    <div class="tsktsxx" ng-show="show002"  data-ng-bind-html="textform"  ></div>'+
+                        '    <button class="xxtskbtn11"  ng-click="remove()">确定</button>'+
+                        '    <button class="xxtskbtn12"  ng-click="xxtskbtn1()">取消</button>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>',
+                        replace: true,
+                        scope: false,
+
+                        //控制器
+                        controller: function($scope,$http,$element,$compile) {
+
+                            //公共$get方法
+                            $scope.$on('getUserInfo',function(e,data){
+                                var defaul=data.defaul;
+                                var resdata=$http.get(data.url)
+                                        .success( function ( response ){
+                                            var res=response;
+                                            if(response.stautscode==200){
+                                                if( defaul !=1){
+                                                    var  data=response.msg;
+                                                    //打开信息提示框显示后台回执信息
+                                                    $scope.$emit('$promptShow',data);
+                                                    //成功后刷新页面
+                                                    $scope.$broadcast('load');
+                                                }else{
+                                                    if(response.data==null){
+                                                        res.data="";
+                                                    }
+                                                    $scope.$broadcast('reaData',res);
+                                                }
+                                            }else if(response.stautscode==500){
+                                                var  data1=response.msg;
+                                                $scope.$emit('$promptShow',data1);
+                                            }else if(response.stautscode==206){
+                                                var  data1=response.msg;
+                                                $scope.$emit('$promptShow',data1);
+                                            }else if(response.stautscode==207){
+                                                var  data1=response.msg;
+                                                $scope.$emit('$promptShow',data1);
+                                            }else if(response.stautscode==2016 ){
+                                                var  data1=response.msg;
+                                                $scope.$emit('$promptShow',data1);
+                                            }
+                                        }).error(function(data,header,config,status){
+                                            var data1='服务内部器错误';
+                                            $scope.$emit('$promptShow',data1);
+                                        })
+                            });
+                            //公共get方法(带参数的)
+                            $scope.$on('postUserInfo',function(e,data){
+                                var defaul=data.defaul;
+                                //对接接口
+                                var resdata= $http({
+                                    method: 'GET',
+                                    url: data.url,
+                                    params:data.fd
+                                })
+                                        .success( function ( response ){
+                                            var res=response;
+                                            if(response.stautscode==200){
+                                                if( defaul !=1){
+                                                    var  data=response.msg;
+                                                    //打开信息提示框显示后台回执信息
+                                                    $scope.$emit('$promptShow',data);
+                                                    //成功后刷新页面
+                                                    $scope.$broadcast('load');
+                                                    $scope.$emit('$closea');
+                                                }else{
+                                                    if(response.data==null){
+                                                        res.data="";
+                                                    }
+                                                    $scope.$broadcast('postData',res);
+                                                }
+                                            }else if(response.stautscode==500){
+                                                var  data1=response.msg;
+                                                $scope.$emit('$promptShow',data1);
+                                            }else if(response.stautscode==206){
+                                                var  data1=response.msg;
+                                                $scope.$emit('$promptShow',data1);
+                                            }else if(response.stautscode==207){
+                                                var  data1=response.msg;
+                                                $scope.$emit('$promptShow',data1);
+                                            }else if(response.stautscode==2016 ){
+                                                var  data1=response.msg;
+                                                $scope.$emit('$promptShow',data1);
+                                            }else{
+                                                var  data1=response.msg;
+                                                $scope.$emit('$promptShow',data1);
+                                            }
+                                        }).error(function(data,header,config,status){
+                                            var data1='服务器内部器错误';
+                                            $scope.$emit('$promptShow',data1);
+                                        })
+                            });
+
+                            //公共post方法(上传图片)
+                            $scope.$on('postMethod',function(e,data){
+                                //创建formdata对象，并赋值
+                                var fd = new FormData();
+                                var file = document.querySelector('input[type=file]').files[0];
+                                for ( var p in data.fd ){ // 方法
+                                    if ( typeof ( data.fd [ p ]) == " function " ){ data.fd [ p ]() ;
+
+                                    } else { // p 为属性名称，obj[p]为对应属性的值
+                                        fd.append( p , data.fd[ p ] );
+                                    } } // 最后显示所有的属性
+
+
+                                var defaul=data.defaul;
+                                //对接接口
+                                var resdata= $http({
+                                    method: 'POST',
+                                    url: data.url,
+                                    data: fd,
+                                    headers: {'Content-Type':undefined},
+                                    transformRequest: angular.identity
+                                })
+                                        .success( function ( response ){
+                                            var res=response;
+                                            if(response.stautscode==200){
+                                                if( defaul !=1){
+                                                    var  data=response.msg;
+                                                    //打开信息提示框显示后台回执信息
+                                                    $scope.$emit('$promptShow',data);
+                                                    //成功后刷新页面
+                                                    $scope.$broadcast('load',data);
+                                                    $scope.$emit('$closea');
+                                                }else{
+                                                    if(response.data==null){
+                                                        res.data="";
+                                                    }
+                                                    $scope.$broadcast('postData',res);
+                                                }
+                                            }else if(response.stautscode==500){
+                                                var  data1=response.msg;
+                                                $scope.$emit('$promptShow',data1);
+                                            }else if(response.stautscode==206){
+                                                var  data1=response.msg;
+                                                $scope.$emit('$promptShow',data1);
+                                            }else if(response.stautscode==207){
+                                                var  data1=response.msg;
+                                                $scope.$emit('$promptShow',data1);
+                                            }else if(response.stautscode==2016 ){
+                                                var  data1=response.msg;
+                                                $scope.$emit('$promptShow',data1);
+                                            }else{
+                                                var  data1=response.msg;
+                                                $scope.$emit('$promptShow',data1);
+                                            }
+                                        }).error(function(data,header,config,status){
+                                            var data1='服务器内部器错误';
+                                            $scope.$emit('$promptShow',data1);
+                                        })
+                            });
+
+                            //初始默认模态框隐藏
+                            $scope.myPrompt1=false;
+                            //声明删除参数
+                            $scope.rData="";
+                            //提示模态框显示函数
+                            $scope.$on('$promptShowR', function(e,data){
+                                //模态框显示
+                                $scope.myPrompt1=true;
+                                $scope.rData=data;
+                            });
+
+                            //模态框页面点击隐藏
+                            $scope.xxtskbtn1=function(){
+                                $scope.myPrompt1=false;
+                            };
+
+                            //确认删除
+                            $scope.remove=function(){
+                                var data=$scope.rData;
+                                //调用get方法获取接口回执信息
+                                $scope.$emit('getUserInfo',data); //调用接口
+                                $scope.myPrompt1=false;
+                            };
+                        }
+                    };
+                })
+
+                //公共信息提示框组件
+                .directive('myPrompt',function(){
+                    //打开模态框调用方法
+                    // var  data='需要显示的内容';
+                    // $scope.$emit('$promptShow',data);
+                    //关闭模态框方法
+                    //$scope.$emit('$close');
+                    return {
+                        restrict: 'EA',
+                        template: '<div ng-show="myPrompt"   class="xxtsk" >'+
+                        '<div ng-show="show001">'+
+                        '    <p class="xxtsktop s-mttop ">'+
+                        '        信息提示'+
+                        '        <button class="xxtskgb" ng-click="xxtskbtn()">'+
+                        '            <img src="img/a-gb.png" alt="">'+
+                        '        </button>'+
+                        '    </p>'+
+                        '    <p class="tsktsxx" >{{content}}</p>'+
+                        '    <div class="tsktsxx" ng-show="show002"  data-ng-bind-html="textform"  ></div>'+
+                        '    <button class="xxtskbtn"  ng-click="xxtskbtn()">确定</button>'+
+                        '</div>'+
+                        '<div ng-show="show002"  id="myhtmlform"   >'+
+                        '</div>'+
+                        '</div>',
+                        replace: true,
+                        scope: false,
+
+                        //控制器
+                        controller: function($scope,$http,$element,$compile,$timeout) {
+
+                            //初始默认模态框隐藏
+                            $scope.myPrompt=false;
+                            //初始默认模态框提示信息部分隐藏
+                            $scope.show001=false;
+                            //初始默认模态框html写入部分隐藏
+                            $scope.show002=false;
+
+                            //提示模态框显示函数
+                            $scope.$on('$promptShow', function(e,data){
+                                //模态框显示
+                                $scope.myPrompt=true;
+                                //提示部分显示
+                                $scope.show001=true;
+                                //html 写入部分隐藏
+                                $scope.show002=false;
+                                //提示信息参数
+                                $scope.content=data;
+                            });
+
+                            //表单模态框显示函数
+                            $scope.$on('$promptShow1', function(e,data){
+                                //清空修改密码字段
+                                $scope.password="";
+                                $scope.newpassword="";
+                                $scope.qrpassword="";
+                                //模态框显示
+                                $scope.myPrompt=true;
+                                //提示信息部分隐藏
+                                $scope.show001=false;
+                                //html 写入部分显示
+                                $scope.show002=true;
+                                //html  写入参数转化
+                                var tpl = $compile(data);
+                                var e = tpl($scope);
+                                var c= angular.element('#myhtmlform').html();
+                                if(c ==''){
+                                    angular.element('#myhtmlform') .append(e);
+                                }
+                            });
+
+                            //安全退出模态框显示函数
+                            $scope.$on('$promptShow2', function(e,data){
+                                //清空修改密码字段
+                                $scope.password="";
+                                $scope.newpassword="";
+                                $scope.qrpassword="";
+                                //模态框显示
+                                $scope.myPrompt=true;
+                                //提示信息部分隐藏
+                                $scope.show001=false;
+                                //html 写入部分显示
+                                $scope.show002=true;
+                                //html  写入参数转化
+                                var tpl = $compile(data);
+                                var e = tpl($scope);
+                                var c= angular.element('#myhtmlform').html();
+                                if(c ==''){
+                                    angular.element('#myhtmlform') .append(e);
+                                }
+                            });
+
+                            //关闭模态框函数
+                            $scope.$on('$close', function(e,data){
+                                $scope.myPrompt=false;
+                            });
+
+                            //模态框页面点击隐藏
+                            $scope.xxtskbtn=function(){
+                                $scope.myPrompt=false;
+                            };
+
+                            //关闭修改密码模态框
+                            $scope.close1=function(){
+                                //清空模态框内容
+                                angular.element('#myhtmlformxx').remove();
+                                $scope.myPrompt=false;
+                            };
+
+                            //保存修改并关闭模态框
+                            $scope.preservation1=function(){
+                                //修改密码
+                                $http({
+                                    method:'GET',
+                                    url:'http://'+service+'/wiscode-rest/csuser/updatepwd/'+userid,
+                                    params:{
+                                        //发送修改内容
+                                        'password':$scope.password,
+                                        'newpassword':$scope.newpassword,
+                                        'qrpassword':$scope.qrpassword,
+                                    }
+                                }).success( function ( response ){
+                                    if(response.stautscode==200){
+                                        //打开模态框
+                                        var wjh=response.msg;
+                                        $scope.$emit('$promptShow',wjh);
+                                        //清楚模态框中内容
+                                        angular.element('#myhtmlformxx').remove();
+                                    }else{
+                                        var wjh=response.msg;
+                                        $scope.$emit('$promptShow',wjh);
+                                        //清楚模态框中内容
+                                        angular.element('#myhtmlformxx').remove();
+                                    }
+                                });
+
+                            };
+
+
+                            //保存修改并关闭模态框
+                            $scope.preservation2=function(){
+                                //调用安全退出接口
+                                $http.get("http://"+service+"/wiscode-rest/csuser/loginOut")
+                                        .success(function(response) {});
+
+                                //清楚模态框中内容
+                                angular.element('#myhtmlformxx').remove();
+                                //关闭模态框
+                                $scope.$emit('$close');
+                                //跳转登陆页面
+                                window.location.href="index.html";
+                            };
+
+                        }
+                    };
+                })
+
+
+
+
+
+
+
+    </script>
+    <script>
+        'use strict';
+
+        angular.module('myApp.allocation', ['ngRoute','ngAria', 'ui.grid', 'ui.grid.resizeColumns', 'ui.grid.selection', 'ui.grid.edit', 'ui.grid.pinning','dataApp.services', 'methodApp.services','proApp.directives','tm.pagination','proApp2.directives'])
+
+                .config(['$routeProvider', function($routeProvider) {
+                    $routeProvider.when('/allocation', {
+                        templateUrl: 'partials/allocation/allocation.html',
+                        controller: 'AllocationController'
+                    });
+                }])
+
+                .controller('AllocationController', ['$scope', '$http', '$interval', 'uiGridConstants','$log','$location','data','userInfo',function ($scope, $http, $interval, uiGridConstants,$log,$location,data,userInfo) {
+
+                    //调取通用数组数据
+                    $scope.stater1=[{"id":"0","name":"已保存"},{"id":"1","name":"已提交"},{"id":"2","name":"已执行"},{"id":"3","name":"已完成"},{"id":"4","name":"强制关闭"}];
+                    //发货仓库数组
+                    $scope.sarr1=[];
+                    //收货仓库数组
+                    $scope.sarr2=[];
+                    //声明data对象
+                    $scope.data={};
+                    //二层模态框表格数组
+                    $scope.sarr3=[];
+                    //二层模态框表格数组
+                    $scope.sarr4=[];
+                    //发货仓库收货仓库判断
+                    $scope.ssda=1;
+                    //表格数组判断
+                    $scope.sarr5=[];
+                    $scope.arr5pd=true;
+                    $scope.dealerId=data.user.userinfo.dealerId;
+                    $scope.fdtypeall1={};
+                    $scope.fdtypeall1.dealerid=$scope.dealerId;
+                    //接口地址
+                    //$scope.data.url='http://'+service+'/wiscode-rest/cbdealertype/querypage?p=1&r=2';    //查询总条数
+                    $scope.data.url2='http://'+service+'/wiscode-rest/cballotorder/querypage';          //获取表格数据    //默认加载及查询接口
+                    $scope.data.url3='http://'+service+'/wiscode-rest/cballotorder/delete/';           //删除接口
+                    $scope.data.url4='http://'+service+'/wiscode-rest/cballotorder/add';           //新增接口
+                    $scope.data.url5='http://'+service+'/wiscode-rest/cbrepository/queryRepositoryByDealerId';           //查询新增模态框仓库接口
+                    $scope.data.url6='http://'+service+'/wiscode-rest/cballotorder/update/';         //编辑接口替换当前行数据
+                    $scope.data.url7='http://'+service+'/wiscode-rest/cbrepository/queryDiffResByDealerId';         //根据单位id和发货仓库查询收货仓库
+
+
+
+                    //定义查询数据对象
+                    $scope.fdtype={};
+                    //调拨单号
+                    $scope.fdtype.orderNo="";
+                    //出库仓库
+                    $scope.fdtype.outRepositoryName="";
+                    //收货仓库
+                    $scope.fdtype.inRepositoryName="";
+                    //创建起始时间
+                    $scope.fdtype.startTime="";
+                    //结束时间
+                    $scope.fdtype.endTime="";
+                    //状态
+                    $scope.fdtype.stauts="";
+                    //点击清空输入框
+                    $scope.typeempty = function(){
+                        //调用清空方法
+                        $scope.empty();
+                    };
+
+                    //清空方法
+                    $scope.empty = function(){
+                        //清空调拨单号
+                        $scope.fdtype.orderNo="";
+                        //清空出库仓库
+                        $scope.fdtype.outRepositoryName="";
+                        //清空收货仓库
+                        $scope.fdtype.inRepositoryName="";
+                        //清空创建起始时间
+                        $scope.fdtype.startTime="";
+                        //清空结束时间
+                        $scope.fdtype.endTime="";
+                        //清空状态
+                        $scope.fdtype.stauts="";
+                    };
+
+                    $scope.Load=function(res){
+                        console.log(res);
+                        //获取默认加载信息
+                        var infdata={
+                            defaul:1,
+                            url:res.url,
+                            fd:res.fd
+                        };
+                        //调用get方法获取接口回执信息
+                        $scope.$emit('postUserInfo',infdata); //调用接口
+                    };
+
+                    //$scope.Load12=function(res){
+                    //    //获取默认加载信息
+                    //    var infdata={
+                    //        defaul:1,
+                    //        url:res.url,
+                    //        fd:res.fd
+                    //    };
+                    //    //调用get方法获取接口回执信息
+                    //    $scope.$emit('postUserInfo',infdata); //调用接口
+                    //};
+
+                    //接受回执数据
+                    $scope.$on('postData',function(e,res){   //获取表格数据信息
+                        console.log(res);
+                        var a=res.data.hasOwnProperty('cbAllotOrderList');
+                        var b=res.data.hasOwnProperty('repositList');
+                        if(a){
+                            //总条数信息
+                            $scope.typelist=res.data.cbAllotOrderSize;
+                            $scope.paginationConf.totalItems=$scope.typelist;
+                            //信息数组赋值
+                            var list=res.data.cbAllotOrderList;
+                            //遍历数组添加编号
+                            for(var i=0;i<list.length; i++){
+                                list[i].number=i+1;
+                            }
+                            //表格赋值
+                            $scope.gridOptions.data = list;
+                        }else if(b){
+                            var list=res.data.repositList;
+                            if($scope.ssda==1){
+                                for(var ii=0;ii<list.length; ii++){
+                                    $scope.sarr1.push({id:list[ii].id,name:list[ii].repositoryName});
+                                }
+                            }else if($scope.ssda==2){
+                                for(var ii=0;ii<list.length; ii++){
+                                    $scope.sarr2.push({id:list[ii].id,name:list[ii].repositoryName});
+                                }
+                            }
+                        }
+                    });
+                    //控制器调用函数
+                    $scope.$on('load',function(e,data){
+                        $scope.fdtype.p=$scope.paginationConf.currentPage;
+                        $scope.fdtype.r=$scope.paginationConf.itemsPerPage;
+                        var as={
+                            fd:$scope.fdtype,
+                            url:$scope.url2
+                        };
+                        $scope.Load(as);
+                    });
+
+                    //分页及默认加载
+                    $scope.paginationConf = {
+                        //默认首页
+                        currentPage: 1,
+                        //总条数
+                        totalItems: $scope.typelist,
+                        //分页判断用每页条数
+                        itemsPerPage: 25,
+                        //每页显示条数
+                        pagesLength: 25,
+                        perPageOptions: [10, 25, 50,100],
+                        onChange: function(){
+                            $scope.fdtype.p=$scope.paginationConf.currentPage;
+                            $scope.fdtype.r=$scope.paginationConf.itemsPerPage;
+                            var as={
+                                fd:$scope.fdtype,
+                                url:$scope.data.url2
+                            };
+                            $scope.Load(as);
+                        }
+                    };
+
+                    //表格数据配置项
+                    $scope.gridOptions = {
+                        enableSorting:false,
+                        enableRowHeaderSelection: false,
+                        multiSelect:false,
+                        columnDefs: [
+                            { name: '...', field: 'number', width: 30 ,pinnedLeft:true , cellClass:'ten',headerCellClass:'pad'  },
+                            { name: '操作', field: 'number',  width:110,pinnedLeft:true ,headerCellClass:'ten' ,cellClass:'ten',cellTemplate:'<button  ng-click="grid.appScope.meascha1(row.entity)"   style="cursor: pointer; border: none;background: rgba(0,0,0,0);line-height: 30px;color:#1293D8; ">编辑</button>/<button ng-click="grid.appScope.measremove1(row.entity.id)" data-toggle="modal" data-target="#measure3"  style="cursor: pointer; border: none;background: rgba(0,0,0,0);line-height: 30px;color:#1293D8; ">删除</button>',},
+                            { name: '调拨单号', field: 'orderNo', width: 200 , cellTooltip:  function( row, col ) {
+                                return  row.entity.orderNo
+                            }},
+                            { name: '状态', field: 'stautsName', width: 60 , cellTooltip:  function( row, col ) {
+                                return  row.entity.stautsName
+                            }},
+                            { name: '出库仓库', field: 'outRepositoryName', width: 150 , cellTooltip:  function( row, col ) {
+                                return  row.entity.outRepositoryName
+                            }},
+                            { name: '收货仓库', field: 'inRepositoryName', width: 150  ,cellTooltip:  function( row, col ) {
+                                return  row.entity.inRepositoryName
+                            }},
+                            { name: '创建人', field: 'creatorName', width: 150  , cellTooltip:  function( row, col ) {
+                                return  row.entity.creatorName
+                            }},
+                            { name: '创建时间', field: 'creatorTime', width: 200    ,cellTooltip:  function( row, col ) {
+                                return  row.entity.creatorTime
+                            }},
+                            { name: '修改人', field: 'modifyName', width: 200  , cellTooltip:  function( row, col ) {
+                                return  row.entity.modifyName
+                            }},
+                            { name: '修改时间', field: 'modifyTime', width: 200    , cellTooltip:  function( row, col ) {
+                                return  row.entity.modifyTime
+                            }}
+                        ]
+                    };
+
+
+                    //表格数据配置项
+                    $scope.gridall = {
+                        enableSorting:false,
+                        enableRowHeaderSelection: false,
+                        multiSelect:false,
+                        columnDefs: [
+                            { name: '...', field: 'numbers', width: 30 ,pinnedLeft:true , cellClass:'ten',headerCellClass:'pad'  },
+                            { name: '删除', field: 'number',  width:50,pinnedLeft:true ,headerCellClass:'ten' ,cellClass:'ten',cellTemplate:'<button ng-click="grid.appScope.measremove1(row.entity.id)" data-toggle="modal" data-target="#measure3"  style="cursor: pointer; border: none;background: rgba(0,0,0,0);line-height: 30px;color:#1293D8; ">删除</button>',},
+
+                            { name: '产品编码', field: 'productCode', width: 100 , cellTooltip:  function( row, col ) {
+                                return  row.entity.productCode
+                            }},
+                            { name: '产品名称', field: 'productName', width: 100 , cellTooltip:  function( row, col ) {
+                                return  row.entity.productName
+                            }},
+                            //{ name: '出库数量', field: 'nums',  width:100,cellTemplate:'<input ng-blur="grid.appScope.ssdabc(row.entity)" style="height: 30px;" type="text" ng-model="fdtype.nums"  >',cellTooltip:  function( row, col ) {
+                            //    return  row.entity.nums
+                            //}},
+                            { name: '出库数量', field: 'nums', width: 100  ,enableCellEdit: true, cellTooltip:  function( row, col ) {
+                                return  row.entity.nums
+                            }},
+                            { name: '基本单位', field: 'unitName', width: 100 , cellTooltip:  function( row, col ) {
+                                return  row.entity.unitName
+                            }},
+                            { name: '执行数量', field: 'zxnumber', width: 100  , cellTooltip:  function( row, col ) {
+                                return  row.entity.zxnumber
+                            }}
+                        ]
+                    };
+
+                    //查询方法
+                    $scope.typequery=function(){
+                        if($scope.fdtype.endTime==""){
+                            $scope.fdtype.endTime=null;
+                        }
+                        if($scope.fdtype.startTime==""){
+                            $scope.fdtype.startTime=null;
+                        }
+                        $scope.fdtype.p=$scope.paginationConf.currentPage;
+                        $scope.fdtype.r=$scope.paginationConf.itemsPerPage;
+                        var as={
+                            url:$scope.data.url2,
+                            fd:$scope.fdtype
+                        };
+                        $scope.Load(as);
+
+                    };
+                    //新增打开模态框并查询必要信息(部分页面用不到)
+                    $scope.typeadd = function(a){
+                        $scope.allqzgb=false;
+                        $scope.ssda=1;
+                        var  as={
+                            url:$scope.data.url5,
+                            fd:$scope.fdtypeall1
+                        };
+                        $scope.Load(as);
+                        //打开模态框
+                        var data={
+                            url:$scope.data.url4,
+                            html: 'modal/allocation.html',
+                            fd:{
+
+                            }
+                        };
+                        var st=1;
+                        $scope.$emit('$promptShowa',data,st);
+                        //var v={
+                        //    dtypecode:3,
+                        //    dtypename:3,
+                        //    level:2
+                        //};
+                        //$scope.$emit('$val',v);
+                    };
+
+                    //发货仓库改变时查找收货仓库
+                    $scope.allocshck = function (){
+                        $scope.sarr2=[];
+                        $scope.ssda=2;
+                        $scope.fdtypeall2={};
+                        $scope.fdtypeall2.dealerId=$scope.dealerId;
+                        $scope.fdtypeall2.repositoryId=$scope.fdadch.outRepository;
+                        var as={
+                            url:$scope.data.url7,
+                            fd:$scope.fdtypeall2
+                        };
+                        $scope.Load(as);
+                    };
+
+                    //编辑打开模态框并查询必要信息
+                    $scope.meascha1 = function(row){
+                        if(row.stauts==1||row.stauts==2){
+                            $scope.allqzgb=true;
+                        }
+                        $scope.allqzgb=true;
+                        $scope.ssda=1;
+                        //$scope.sarr1=[];
+                        //$scope.sarr2=[];
+                        $scope.sarr1.push({id:row.outRepository,name:row.outRepositoryName});
+                        $scope.sarr2.push({id:row.inRepository,name:row.inRepositoryName});
+                        var  id=row.id;
+                        console.log(row);
+                        $scope.fdtypeall1={};
+                        $scope.fdtypeall1.dealerid=$scope.dealerId;
+                        var as={
+                            url:$scope.data.url5,
+                            fd:$scope.fdtypeall1
+                        };
+                        $scope.Load(as);
+                        //打开模态框
+                        var data={
+                            url:$scope.data.url6+id,
+                            html: 'modal/allocation.html',
+                            st:2,
+                            fd:{
+                                'orderNo':row.orderNo,
+                                'outRepository':row.outRepository,
+                                'inRepository':row.inRepository,
+                                'remark':row.remark
+                            }
+                        };
+                        //$scope.code(data.fd);
+                        //$scope.name(data.fd);
+                        //$scope.level(data.fd);
+                        $scope.$emit('$promptShowa',data);
+                    };
+
+                    $scope.ssdabc=function(row){
+                        console.log(row);
+                        console.log($scope.fdtype.nums);
+                    };
+
+                    //删除获取选中行
+                    $scope.measremove1 = function(id){
+                        var  data={
+                            //是否弹出提示框
+                            defaul:2,
+                            //接口地址
+                            url:$scope.data.url3+id
+                        };
+                        //打开模态框
+                        $scope.$emit('$promptShowR',data);
+                    };
+                    //编辑打开产品模态框
+                    $scope.measchas4 = function(){
+                        $scope.$emit('$promptShowp');
+                    };
+
+                    //接受产品二层模态框的数据
+                    $scope.$on('$prodatax',function(e,data){
+                        function arrayIndexOf(arr, fn) {
+                            var result = -1;
+                            arr.some(function (item, index) {
+                                var r = fn(item);
+                                if (r) {
+                                    result = index;
+                                }
+                                return r;
+                            });
+                            return result;
+                        }
+                        //添加数据时执行判断
+                        $scope.sarr3pd = function (indexer) {
+                            var a =data;
+                            data.nums="双击输入出库数量";
+                            var b = $scope.sarr3;
+                            var idx = arrayIndexOf(b, function (item) {
+                                return item.number === a.number;
+                            });
+                            if (idx === -1) {
+                                $scope.sarr3.push(data);
+                            }
+                        };
+                        $scope.sarr3pd();
+                        for(var i=0;i<$scope.sarr3.length; i++){
+                            $scope.sarr3[i].numbers=i+1;
+                            $scope.sarr3[i].zxnumber=0;
+                            //$scope.sarr3[i].nums="双击输入出库数量";
+                        }
+                        //对表格进行赋值
+                        $scope.gridall.data = $scope.sarr3;
+                    });
+
+
+                    //本页面表单验证
+                    $scope.v={};
+                    //验证编码
+                    $scope.code=function(data){
+                        if(data.dtypecode==""){
+                            $scope.v.dtypecode=1;
+                            $scope.v.errorText='往来单位类型编码不能为空';
+                        }else{
+                            $scope.v.dtypecode=2;
+                            $scope.v.errorText='';
+                            if($scope.v.dtypename==1&&$scope.v.level==1){
+                                $scope.v.errorText='红色框为必填项请认真填写';
+                            }else{
+                                if($scope.v.level==1){
+                                    $scope.level(data);
+                                } else if($scope.v.dtypename==1){
+                                    $scope.name(data);
+                                }
+                            }
+                        };
+                        var v=$scope.v;
+                        $scope.$emit('$val',v);
+                    };
+                    //子级控制调用函数
+                    $scope.$on('$code',function(e,data){
+                        $scope.code(data);
+                    });
+                    //验证名字
+                    $scope.name=function(data){
+                        if(data.outrepository==""){
+                            $scope.v.outrepository=1;
+                            $scope.v.errorText='往来单位类型名称不能为空';
+                        }
+                        else{
+                            $scope.v.inRepository=2;
+                            $scope.v.errorText="";
+                            if($scope.v.dtypecode==1&&$scope.v.level==1){
+                                $scope.v.errorText='红色框为必填项请认真填写';
+                            }else{
+                                if($scope.v.level==1){
+                                    $scope.level(data);
+                                } else if($scope.v.dtypecode==1){
+                                    $scope.code(data);
+                                }
+                            }
+                        }
+                        var v=$scope.v;
+                        $scope.$emit('$val',v);
+                    };
+                    //子级控制调用函数
+                    $scope.$on('$name',function(e,data){
+                        $scope.name(data);
+                    });
+                    //验证级别
+                    $scope.level=function(data){
+                        var reg=/^([1-9])$/;
+                        if(data.level==""){
+                            $scope.v.level=1;
+                            $scope.v.errorText='级别不能为空';
+                        }else{
+                            if(reg.test(data.level)){
+                                $scope.v.level=2;
+                                $scope.v.errorText="";
+                                if($scope.v.dtypename==1&&$scope.v.dtypecode==1){
+                                    $scope.v.errorText='红色框为必填项请认真填写';
+                                }else{
+                                    if($scope.v.dtypecode==1){
+                                        $scope.code(data);
+                                    } else if($scope.v.dtypename==1){
+                                        $scope.name(data);
+                                    }
+                                }
+                            }
+                            else{
+                                $scope.v.level=1;
+                                $scope.v.errorText='级别格式不正确';
+                            }
+                        }
+                        var v=$scope.v;
+                        $scope.$emit('$val',v);
+                    };
+                    //子级控制调用函数
+                    $scope.$on('$level',function(e,data){
+                        $scope.level(data);
+                    });
+
+                    //验证通过提交表单
+                    $scope.$on('$validation',function(e,data){
+                        var reg=/^([1-9])$/;
+                        if(data.dtypename!=""&&data.dtypecode!=""){
+                            if(data.level==""){
+                                $scope.v.level=1;
+                                $scope.v.errorText='级别不能为空';
+                            }else{
+                                if(reg.test(data.level)){
+                                    $scope.$emit('$Interface',v);
+                                }
+                                else{
+                                    $scope.v.level=1;
+                                    $scope.v.errorText='级别格式不正确';
+                                }
+                            }
+                            var v=$scope.v;
+                            $scope.$emit('$val',v);
+                        }else{
+
+                            $scope.code(data);
+                            $scope.name(data);
+                            $scope.level(data);
+                            $scope.v.errorText='红色框为必填项请认真填写';
+
+                            var v=$scope.v;
+                            $scope.$emit('$val',v);
+                        }
+
+                    });
+                }]);
+    </script>
 </body>
 </html>

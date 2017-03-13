@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="../lib/js/jquery.js"></script>
+<script src="../lib/js/angular.js"></script>
+<script src="../lib/js/angular-route.js"></script>
+<body ng-controller="customersCtrl">
+<script>
+    //下面的例子是错误的
+    var url="https://www.baidu.com/home/pcweb/data/mancardhtml?id=2&isPull=&indextype=manht&_req_seqid=0x844e867d000aa357&asyn=1&t=1489114277534&sid=1423_21103_17001_21932_22035_22157&callback=aaa"
+    var script=document.createElement("script");
+    script.src=url;
+    document.getElementsByTagName("head")[0].appendChild(script)
+
+
+
+</script>
+</body>
+</html>

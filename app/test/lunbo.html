@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="../lib/js/jquery.js"></script>
+<script src="../lib/js/TouchSlide.1.1.js"></script>
+
+<body >
+<!-- 轮播 start -->
+<style>
+    .slideBox{position:relative;  overflow:hidden; margin:0 auto;  max-width:560px;}
+    .slideBox .hd{ position:absolute;  bottom:5px;width:100%;  z-index:1; }
+    .slideBox .hd ul{  margin:0 auto; text-align: center}
+    .slideBox .hd li{ display:inline-block; width:25px;height:12px; background:#333;
+        text-indent:-9999px;overflow:hidden; margin:0 6px;   }
+    .slideBox .hd li.on{ background:#eee;  }
+    .slideBox .bd{ position:relative; z-index:0; }
+    .slideBox .bd li{ position:relative; text-align:center;  }
+    .slideBox .bd li a{ display: block; }
+    .bd ul .an-lun-1{  background:url(../images/congratulateh1.png) no-repeat center center  }/*one*/
+    .bd ul .an-lun-2{  background:url("../images/gaosutongdao-01.png") no-repeat center center  }
+    .bd ul .an-lun-3{  background:url("../images/gaosutongdao-02.png") no-repeat center center  }
+    .bd ul .an-lun-4{  background:url("../images/gaosutongdao-03.png") no-repeat center center  }
+    .bd ul li a{  background-size: cover  }
+    @media screen and (min-width: 375px){
+        .slideBox .bd .tempWrap {height: 340px;}
+        .slideBox .bd ul li a {height: 340px;}
+    }
+    @media screen and (max-width: 414px){
+        .slideBox .bd .tempWrap li a{height: 375px;}
+        .slideBox .bd ul li a{height: 375px;}
+    }
+
+</style>
+<div id="heroBanner" class="mod-hero" style="">
+    <div id="slideBox" class="slideBox">
+
+        <div class="bd">
+            <ul>
+                <li><a class="pic an-lun-1" href="javascript:;"></a></li>
+                <li><a class="pic an-lun-2" href="javascript:;"></a></li>
+                <li><a class="pic an-lun-3" href="javascript:;"></a></li>
+                <li><a class="pic an-lun-4" href="javascript:;"></a></li>
+            </ul>
+        </div>
+
+        <div class="hd">
+            <ul></ul>
+        </div>
+    </div>
+    <script type="text/javascript">
+        TouchSlide({
+            slideCell:"#slideBox",
+            titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+            mainCell:".bd ul",
+            effect:"leftLoop",
+            autoPage:true,//自动分页
+            autoPlay:true, //自动播放
+            interTime:25000
+        });
+    </script>
+</div>
+</body>
+</html>

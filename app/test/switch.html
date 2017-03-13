@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="../lib/js/jquery.js"></script>
+<script src="../lib/js/angular.js"></script>
+<script src="../lib/js/angular-route.js"></script>
+<body ng-controller="allcontrol">
+<select ng-model="an">
+    <option value="baidu" selected="selected">百度</option>
+    <option value="wangyi">网易</option>
+    <option value="tengxun">腾讯</option>
+</select>
+    <div ng-switch="an">
+
+        <div ng-switch-when="baidu">
+            <p>这是百度的页面</p>
+            <p>www.baidu.com</p>
+        </div>
+
+        <div ng-switch-when="wangyi">
+            <p>这是网易的页面</p>
+            <p>www.wangyi.com</p>
+        </div>
+
+        <div ng-switch-when="tengxun">
+            <p>这是腾讯的页面</p>
+            <p>www.tengxun.com</p>
+        </div>
+    </div>
+<select ng-model="as">
+    <option value="1">1</option>
+    <option value="2" selected>2</option>
+    <option value="3">3</option>
+</select>
+
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("allcontrol",function(){})
+</script>
+</body>
+</html>

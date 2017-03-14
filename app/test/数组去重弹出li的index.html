@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组去重</title>
+</head>
+<body>
+<ul>
+    <li>1111</li>
+    <li class="aa1">2222</li>
+    <li>3333</li>
+</ul>
+
+<script src="../lib/js/jquery.js"></script>
+<script>
+    var a=[1,2,4,5,6,5,4,3,2];
+    var b=[];
+    for(var i=0;i<a.length;i++){
+        if(b.indexOf(a[i])==-1){
+            b.push(a[i]);
+        }
+    }
+    console.log(b);
+
+</script>
+
+<script>
+    $("ul").click(function(){
+
+        //jquery
+//     console.log($(this));//ul
+//        $(this).children("li").each(function(){
+//            console.log($(this));//li
+//            alert($(this).index())//依次弹出li的index
+//        })
+
+        //原生js
+        var el=document.getElementsByTagName("li");
+        for(var i=0;i<el.length;i++){
+            alert(el[i].innerHTML)//依次弹出li的内容
+            alert(i)//依次弹出li的index
+        }
+    })
+
+</script>
+</body>
+</html>

@@ -25,22 +25,47 @@
 </script>
 
 <script>
+    var el=document.getElementsByTagName("li");
+
     $("ul").click(function(){
 
-        //jquery
+        //jquery   正确
 //     console.log($(this));//ul
 //        $(this).children("li").each(function(){
 //            console.log($(this));//li
 //            alert($(this).index())//依次弹出li的index
 //        })
 
-        //原生js
-        var el=document.getElementsByTagName("li");
-        for(var i=0;i<el.length;i++){
-            alert(el[i].innerHTML)//依次弹出li的内容
-            alert(i)//依次弹出li的index
-        }
-    })
+        //原生js  正确
+//        for(var i=0;i<el.length;i++){
+//            alert(el[i].innerHTML)//依次弹出li的内容
+//            alert(i)//依次弹出li的index
+//
+//        }
+    });
+
+
+
+        //弹出三次3  错误
+//    for(var i=0;i<el.length;i++){
+//        $("li").click(function(){
+//            alert(i)
+//        })//弹出三次3
+//
+//    }
+
+    //闭包方式解决  正确
+
+$("ul").click(function(){//点击ul的时候执行下边这个函数 也可点击li的时候执行 不写的话 就一打开网页就开始执行了
+    for(var i=0;i<el.length;i++){
+        (function(res){//形参res
+            alert(res);
+        })(i)//传入实参i
+
+    }
+})
+
+
 
 </script>
 </body>

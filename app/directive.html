@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="lib/css/bootstrap.css">
+</head>
+<script src="lib/js/jquery.js"></script>
+<script src="lib/js/angular.js"></script>
+<body>
+<h1>angular全在test文件夹中   index中是杂记</h1>
+<div ng-controller="acontrol">
+    <div>
+        <a class="btn btn-default" item="a1"  add href="">+</a>
+        <input ng-model="a1" type="tel" value={{a1}}  class="btn btn-default">
+        <a remove item="a1" class="btn btn-default" href="">-</a>
+    </div>
+
+    <div>
+        <a class="btn btn-default" item="a2" add href="">+</a>
+        <input ng-model="a2" value="a2"  class="btn btn-default" type="text">
+        <a item="a2" remove class="btn btn-default" href="">-</a>
+    </div>
+    <div>
+        <a class="btn btn-default" item="as" add href="">+</a><input ng-model="a3" value="a3"  class="btn btn-default" type="text"><a class="btn btn-default" href="">-</a><br>
+
+    </div>
+    <div>
+        <a class="btn btn-default" item="as" add href="">+</a><input ng-model="a4" value="a4"  class="btn btn-default" type="text"><a class="btn btn-default" href="">-</a>
+
+    </div>
+</div>
+</body>
+<script>
+    var app=angular.module("app",[]);
+    app.controller("acontrol",function($scope){
+        $scope.a1=1;
+        $scope.a2=1;
+        $scope.a3=1;
+        $scope.a4=1;
+    });
+    app.directive("add",function(){
+        return{
+            link:function(scope,ele,attrs){
+                ele.click(function(){
+                    if(attrs.step){
+
+                    }else{
+                        attrs.step=1;
+                    }
+                    scope[attrs.item]+=attrs.step;
+                    scope.$apply();
+                })
+            }
+        }
+    });
+    app.directive("remove",function(){
+        return{
+            link:function(scope,ele,attrs){
+                ele.click(function(){
+                    if(scope[attrs.item]==0){
+                        return
+                    }else{
+                        if(attrs.step){
+
+                        }else{
+                            attrs.step=1;
+                        }
+                        scope[attrs.item]-=attrs.step;
+                        scope.$apply();
+                    }
+                })
+            }
+        }
+    })
+
+</script>
+</html>

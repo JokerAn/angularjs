@@ -88,46 +88,46 @@
 
     <h2 class="price-small-title">以下是自定义的</p>
 
-    <div>
-        <div class=" next1 btn-group heshu clear" style="display: block">
-            <button type="button" class="btn btn-default " data-cpu="{{o.first}}" ng-repeat="o in heshuitem|unique:'first'">{{o.first}}核</button>
-        </div>
-        <div class="gshu">
-            <br>
-            <p>first=1</p>
-            <div class="next2 btn-group  clear" style="display: block">
-                <button type="button" class="btn btn-default " data-second="{{o.second}}" ng-repeat="o in heshuitem|allfirst1:'first'">{{o.second/1024}}GB</button>
+        <div>
+            <div class=" next1 btn-group heshu clear" style="display: block">
+                <button type="button" class="btn btn-default " data-cpu="{{o.first}}" ng-repeat="o in heshuitem|unique:'first'">{{o.first}}核</button>
             </div>
-            <div class="next2 btn-group  clear" style="display: block">
-                <button type="button" class="btn btn-default " data-second="{{o.second}}" ng-repeat="o in heshuitem|filter:firstis1">{{o.second/1024}}GB</button>
+            <div class="gshu">
+                <br>
+                <p>first=1</p>
+                <div class="next2 btn-group  clear" style="display: block">
+                    <button type="button" class="btn btn-default " data-second="{{o.second}}" ng-repeat="o in heshuitem|allfirst1:'first'">{{o.second/1024}}GB</button>
+                </div>
+                <div class="next2 btn-group  clear" style="display: block">
+                    <button type="button" class="btn btn-default " data-second="{{o.second}}" ng-repeat="o in heshuitem|filter:firstis1">{{o.second/1024}}GB</button>
+                </div>
+
+                <br>
+                <p>first=2</p>
+                <div class="next2 btn-group  clear">
+                    <button type="button" class="btn btn-default "data-second="{{o.second}}" ng-repeat="o in heshuitem|allfirst2:'first'">{{o.second/1024}}GB</button>
+                </div>
+                <div class="next2 btn-group  clear">
+                    <button type="button" class="btn btn-default "data-second="{{o.second}}" ng-repeat="o in heshuitem|filter:firstis2">{{o.second/1024}}GB</button>
+                </div>
+                <br>
+                <p>first=4</p>
+                <div class="next2 btn-group  clear">
+                    <button type="button" class="btn btn-default " data-second="{{o.second}}" ng-repeat="o in heshuitem|allfirst4:'first'">{{o.second/1024}}GB</button>
+                </div>
+                <br>
+                <p>first=8</p>
+                <div class="next2 btn-group  clear">
+                    <button type="button" class="btn btn-default " data-second="{{o.second}}" ng-repeat="o in heshuitem|allfirst8:'first'">{{o.second/1024}}GB</button>
+                </div>
+                <br>
+                <p>first=12</p>
+                <div class="next2 btn-group  clear">
+                    <button type="button" class="btn btn-default "  data-second="{{o.second}}" ng-repeat="o in heshuitem|allfirst12:'first'">{{o.second/1024}}GB</button>
+                </div>
             </div>
 
-            <br>
-            <p>first=2</p>
-            <div class="next2 btn-group  clear">
-                <button type="button" class="btn btn-default "data-second="{{o.second}}" ng-repeat="o in heshuitem|allfirst2:'first'">{{o.second/1024}}GB</button>
-            </div>
-            <div class="next2 btn-group  clear">
-                <button type="button" class="btn btn-default "data-second="{{o.second}}" ng-repeat="o in heshuitem|filter:firstis2">{{o.second/1024}}GB</button>
-            </div>
-            <br>
-            <p>first=4</p>
-            <div class="next2 btn-group  clear">
-                <button type="button" class="btn btn-default " data-second="{{o.second}}" ng-repeat="o in heshuitem|allfirst4:'first'">{{o.second/1024}}GB</button>
-            </div>
-            <br>
-            <p>first=8</p>
-            <div class="next2 btn-group  clear">
-                <button type="button" class="btn btn-default " data-second="{{o.second}}" ng-repeat="o in heshuitem|allfirst8:'first'">{{o.second/1024}}GB</button>
-            </div>
-            <br>
-            <p>first=12</p>
-            <div class="next2 btn-group  clear">
-                <button type="button" class="btn btn-default "  data-second="{{o.second}}" ng-repeat="o in heshuitem|allfirst12:'first'">{{o.second/1024}}GB</button>
-            </div>
         </div>
-
-    </div>
 
 </div>
 <script>
@@ -211,9 +211,9 @@
 
     app.filter('unique', function ($rootScope) {
         heshuitem=$rootScope.heshuitem;
-        return function (a, filtername) {//如果ng-repeat中 team in teams|unique:first  ,teams就是则个形参a, first就是这个形参filtername
+        return function (a, filtername) {//如果ng-repeat中 team in teams|unique:'first'  ,teams就是则个形参a, first就是这个形参filtername
             console.log(a);//heshuitem这个数组
-            console.log(filtername);//first,如果 team in teams|unique:second 则输出second
+            console.log(filtername);//first,如果 team in teams|unique:'second' 则输出second
             var output = [],
                     keys = [];
             angular.forEach(a, function (heshuitem) {
@@ -228,7 +228,7 @@
         }
     });
     app.filter('allfirst1', function ($rootScope) {//简化版本是 $scope.firstis1 ,
-        heshuitem=$rootScope.heshuitem;
+        heshuitem=$rootScope.heshuitem;             //o in heshuitem|filter:firstis1   ,  firstis1 不加引号
         return function (a, filtername) {
             var output = [];
             angular.forEach(a, function (heshuitem) {

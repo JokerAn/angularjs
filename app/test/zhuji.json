@@ -1,0 +1,32 @@
+
+//这是龙腾云计算价格的主机“1核4G”的数据
+[
+  {"unitid":3211,"unitname":"1核_1GB","objectType":3,"first":1,"second":1024},
+  {"unitid":3212,"unitname":"1核_2GB","objectType":3,"first":1,"second":2048},
+  {"unitid":3213,"unitname":"1核_4GB","objectType":3,"first":1,"second":4096},
+  {"unitid":3214,"unitname":"2核_1GB","objectType":3,"first":2,"second":1024},
+  {"unitid":3215,"unitname":"2核_2GB","objectType":3,"first":2,"second":2048},
+  {"unitid":3216,"unitname":"2核_4GB","objectType":3,"first":2,"second":4096},
+  {"unitid":3217,"unitname":"2核_6GB","objectType":3,"first":2,"second":6144},
+  {"unitid":3218,"unitname":"2核_8GB","objectType":3,"first":2,"second":8192},
+  {"unitid":3219,"unitname":"4核_2GB","objectType":3,"first":4,"second":2048},
+  {"unitid":3220,"unitname":"4核_4GB","objectType":3,"first":4,"second":4096},
+  {"unitid":3221,"unitname":"4核_6GB","objectType":3,"first":4,"second":6144},
+  {"unitid":3222,"unitname":"4核_8GB","objectType":3,"first":4,"second":8192},
+  {"unitid":3223,"unitname":"4核_12GB","objectType":3,"first":4,"second":12288},
+  {"unitid":3224,"unitname":"4核_16GB","objectType":3,"first":4,"second":16384},
+  {"unitid":3225,"unitname":"8核_4GB","objectType":3,"first":8,"second":4096},
+  {"unitid":3226,"unitname":"8核_6GB","objectType":3,"first":8,"second":6144},
+  {"unitid":3227,"unitname":"8核_8GB","objectType":3,"first":8,"second":8192},
+  {"unitid":3228,"unitname":"8核_12GB","objectType":3,"first":8,"second":12288},
+  {"unitid":3229,"unitname":"8核_16GB","objectType":3,"first":8,"second":16384},
+  {"unitid":3230,"unitname":"8核_24GB","objectType":3,"first":8,"second":24576},
+  {"unitid":3231,"unitname":"8核_32GB","objectType":3,"first":8,"second":32768},
+  {"unitid":3232,"unitname":"12核_8GB","objectType":3,"first":12,"second":8192},
+  {"unitid":3233,"unitname":"12核_12GB","objectType":3,"first":12,"second":12288},
+  {"unitid":3234,"unitname":"12核_16GB","objectType":3,"first":12,"second":16384},
+  {"unitid":3235,"unitname":"12核_24GB","objectType":3,"first":12,"second":24576},
+  {"unitid":3236,"unitname":"12核_32GB","objectType":3,"first":12,"second":32768},
+  {"unitid":3237,"unitname":"12核_40GB","objectType":3,"first":12,"second":40960},
+  {"unitid":3238,"unitname":"12核_48GB","objectType":3,"first":12,"second":49152}
+]

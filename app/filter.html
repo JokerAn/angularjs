@@ -86,7 +86,7 @@
 
     <hr>
 
-    <h2 class="price-small-title">以下是自定义的</p>
+    <h2 class="price-small-title">以下是自定义的</h2>
 
         <div>
             <div class=" next1 btn-group heshu clear" style="display: block">
@@ -148,8 +148,11 @@
 
         //传统过滤器定义的方法
         $scope.func = function(e){return e.age>4;};
-        $scope.firstis1 = function(e){return e.first==1;};
-        $scope.firstis2 = function(e){return e.first==2;};
+        $scope.firstis1 = function(item){return item.first==1;};
+        $scope.firstis2 = function(item){ //形参item 就是 o in data 中的 o ，
+            console.log(item);
+            return item.first==2;
+        };
 
         $rootScope.heshuitem=[
             {"unitid":3211,"unitname":"1核_1GB","objectType":3,"first":1,"second":1024},
@@ -211,9 +214,9 @@
 
     app.filter('unique', function ($rootScope) {
         heshuitem=$rootScope.heshuitem;
-        return function (a, filtername) {//如果ng-repeat中 team in teams|unique:'first'  ,teams就是则个形参a, first就是这个形参filtername
+        return function (a, filtername) {//如果ng-repeat中 team in teams|unique:first  ,teams就是则个形参a, first就是这个形参filtername
             console.log(a);//heshuitem这个数组
-            console.log(filtername);//first,如果 team in teams|unique:'second' 则输出second
+            console.log(filtername);//first,如果 team in teams|unique:second 则输出second
             var output = [],
                     keys = [];
             angular.forEach(a, function (heshuitem) {
@@ -228,7 +231,7 @@
         }
     });
     app.filter('allfirst1', function ($rootScope) {//简化版本是 $scope.firstis1 ,
-        heshuitem=$rootScope.heshuitem;             //o in heshuitem|filter:firstis1   ,  firstis1 不加引号
+        heshuitem=$rootScope.heshuitem;
         return function (a, filtername) {
             var output = [];
             angular.forEach(a, function (heshuitem) {

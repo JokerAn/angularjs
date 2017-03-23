@@ -5,15 +5,8 @@
     <title>demo</title>
     <link href="http://cdn.bootcss.com/ionic/1.2.4/css/ionic.css" rel="stylesheet">
 </head>
-<script src="lib/js/jquery.js"></script>
+<script src="../lib/js/jquery.js"></script>
 <style>
-    .clear:after {
-        content: ".";
-        display: block;
-        height: 0;
-        clear: both;
-        visibility: hidden;
-    }
     /*横条样式*/
     input[type=range] {
         padding:0 0 0 0;
@@ -21,38 +14,44 @@
         width: 100%;
         background: -webkit-linear-gradient(#111, blue) no-repeat, #ddd;/*设置左边颜色为#61bd12，右边颜色为#ddd*/
         background-size: 1% 100%;/*设置左右宽度比例*/
-        height: 10px;/*横条的高度*/
+        height: 5px;/*横条的高度*/
     }
     /*拖动块的样式*/
     input[type=range]::-webkit-slider-thumb {
         -webkit-appearance: none;/*清除系统默认样式*/
-        height: 26px;/*拖动块高度*/
-        width: 15px;/*拖动块宽度*/
-        /*background: #333;!*拖动块背景*!*/
-        background: url("images/an-input.png")no-repeat center center;
+        height: 36px;/*拖动块高度*/
+        width: 20px;/*拖动块宽度*/
+        /*background: #333;!*拖动块背景 没有下边那个背景图的话就得打开了 *!*/
+        background: url("../images/an-input.png")no-repeat center center;/*小滑块*/
         background-size: 111% 117%;
         top:1px;
         /*border-radius: 50%; !*外观设置为圆形*!*/
         border: solid 1px #0079E1; /*设置边框*/
         overflow: hidden;
     }
+    input[type=range]:focus{
+        outline: none;
+    }
 </style>
 <body>
-<div class="clear" style="padding-bottom:10px">
-    <input style="margin:20px 0 0 20px" class="a1 " type="range" max="100" value="1" min="1" id="check">
+<div style="border:1px solid #ddd;width:400px;height:200px;padding:10px;">
+    <input type="range" max="100" min="1" value="1">
 
 </div>
-
-<p>ss</p>
 </body>
-<script>
+<script type="text/javascript">
     $(document).on("mousemove","input[type='range']",function(){
-        var a=$(this).val()+"%";
-        $(this).css({
-            "background-size":a+" 100%"
-        });
-        console.log($(this).css("background-size"));
-    })
+        var max=$(this).attr("max");
+        var val=$(this).val();
+        var a=val/max*100+"%";
+        $(this).css({"background-size":a+" 100%"});
+    });
+    $(document).on("click","input[type='range']",function(){
+        var max=$(this).attr("max");
+        var val=$(this).val();
+        var a=val/max*100+"%";
+        $(this).css({"background-size":a+" 100%"});
+    });
 
 </script>
 </html>

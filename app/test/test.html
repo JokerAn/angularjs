@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../lib/js/jquery.js"></script>
+    <script src="../lib/js/angular.js"></script>
+    <script src="../lib/js/angular-route.js"></script>
+</head>
+<body ng-controller="allController">
+    <ul ng-repeat="o in lists track by $index">
+        <li>
+            {{o}}
+        </li>
+    </ul>
+</body>
+<script>
+    var app=angular.module("app",[]);
+    app.controller("allController",function($scope){
+        $scope.lists=[1,2,3,4,2];
+    })
+</script>
+</html>

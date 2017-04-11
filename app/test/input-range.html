@@ -12,15 +12,16 @@
         padding:0 0 0 0;
         -webkit-appearance: none;/*清除系统默认样式*/
         width: 100%;
-        background: -webkit-linear-gradient(#111, blue) no-repeat, #ddd;/*设置左边颜色为#61bd12，右边颜色为#ddd*/
+        /*background: -webkit-linear-gradient(#111, blue) no-repeat, #ddd;!*设置左边颜色为渐变#111, blue，右边颜色为#ddd*!*/
+        background: -webkit-linear-gradient(blue,blue) no-repeat, #ddd;/*设置左边颜色为blue，右边颜色为#ddd*/
         background-size: 1% 100%;/*设置左右宽度比例*/
         height: 5px;/*横条的高度*/
     }
     /*拖动块的样式*/
     input[type=range]::-webkit-slider-thumb {
         -webkit-appearance: none;/*清除系统默认样式*/
-        height: 36px;/*拖动块高度*/
-        width: 20px;/*拖动块宽度*/
+        height: 36px;/*小滑块高度*/
+        width: 20px;/*小滑块宽度*/
         /*background: #333;!*拖动块背景 没有下边那个背景图的话就得打开了 *!*/
         background: url("../images/an-input.png")no-repeat center center;/*小滑块*/
         background-size: 111% 117%;

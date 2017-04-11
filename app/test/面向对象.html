@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link rel="stylesheet" href="../lib/css/bootstrap.css">
+<script src="../lib/js/jquery.js"></script>
+<body>
+
+<script>
+    function an(){
+        this.name="阿娜"
+    }
+
+    an.prototype={//这一步在实例化的时候最先执行  执行完这一步然后在执行上边的那个this.name="阿娜"
+        name:"按",
+        age:22,
+        sex:"男",
+        info:function(){
+            console.log("我是an的info"+this.name+","+this.age)
+        }
+    };
+//-----------实例化-----------//
+    var as=new an();
+
+    console.log("111 ,"+as.name);//阿娜  不是“按” 是“阿娜” “阿娜”替换了“按”
+    console.log("111 ,"+as.city);//undefined 因为没定义
+    as.info();//我是an的info阿娜,22
+
+
+
+    function an2() {
+        this.value="我是value",
+        this.name="安顺口",
+        this.info=function(){
+            console.log("我是an2的info"+this.name)
+        }
+    }
+    an2.prototype.see="look";//这句话相当于白写 因为第底下那句把整个an2的prototype给完全替换了
+
+//-----------面向对象继承-----------//
+    an2.prototype=an.prototype;//就相当于 var a={name:"an"},var b={name:"tome",age:12}
+    //然后 a = b 这样其实把 an2的prototype完全替换成an的了 因为先执行这一步所以 上边this.value="我是value"
+    //就相当与重新增加了一个属性 this.name="安顺口" 就相当于 将 继承 an的name属性值“阿娜” 修改为“安顺口”
+
+//-----------实例化-----------//
+    var as2=new an2();
+
+
+    //如果在这写an2.prototype={asd:"新定义的as2"}//就相当于白写了 因为在实例化之后了 就跟没写一样
+    as2.info();//我是an2的info安顺口
+    as.info();//我是an的info阿娜,22 //这个本应该与上边那个结果一样 因为是引用  但是因为用的是tiis.info 这个后执行所以
+    // 调用是立马改成调用时候的值 这时as2的info其实也改变了 但是当调用as2的info的时候有立马改过了（这时as的info其实也改变了）可能是这样解释的。。。。
+    console.log(as2.value);//我是value
+    console.log(as2.see);//undefined
+    //console.log(as2.asd);//undefined
+
+
+
+
+
+////////////////////////////////////////////////////////////////
+
+    function class1(){
+
+    }
+    class1.prototype={
+        p1:"p1",
+        method1:function(){
+            alert("from class1 method1")
+        }
+    };
+    function class2(){
+
+    }
+    class2.prototype=class1.prototype;//指针指向同一个位置 不是拷贝是引用 有缺陷 class2改变ckass1也改变 反之依然 解决办法是下边这样
+//    for(var p in class1.prototype){
+//        class2.prototype[p]=class1.prototype[p]
+//    }//如果有100个class100 那就需要写100次这个for循环
+
+//    所以可以写一个公用方法： 但是需要放到所有js的最前边 放到这是不行的
+//    Function.prtottype.inherit=function(aaa){
+//        for(var p in aaa.prototype){
+//            this.prototype[p]=aaa.prototype[p]
+//        }
+//    }
+//   这样就直接写成  class2.inherit(class1);class3.inherit(class1);..... 就行了
+
+
+    class2.prototype.p2="p2";
+    class2.prototype.method2=function(){
+        alert("method2");
+    };
+    class2.prototype.method1=function(){
+        alert("from class2 method1")
+    };
+
+    var class1=new class1();
+    alert(class1.p1);
+    class1.method1();//from class2 method1
+
+    var class2=new class2();
+    alert(class2.p1);
+    alert(class2.p2);
+    class2.method1();//from class2 method1
+    class2.method2();
+</script>
+</body>
+</html>

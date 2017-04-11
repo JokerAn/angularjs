@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link rel="stylesheet" href="../lib/css/bootstrap.css">
+<script src="../lib/js/jquery.js"></script>
+<body>
+<select onchange="select(this)" id="an">
+    <option >please select</option>
+    <option value="name">姓名</option>
+    <option value="age">年龄</option>
+    <option value="city">城市</option>
+    <option value="sex">性别</option>
+</select>
+
+<script>
+    function user() {
+        this.name="jaokeran";
+        this.age=12;
+        this.city="北京";
+        this.sex="男"
+    }
+    var user=new user();
+    function select(sel){
+
+        //console.log(sel.selectedIndex);//被选中的是第几个  第一个为0
+
+        if(sel.selectedIndex==0) return; //选中的是第一项 就什么也不做退出来
+        if(sel.value=="name"){
+            console.log(user.name);
+        }
+        if(sel.value=="age"){
+            console.log(user.age);
+        }
+        if(sel.value=="city"){
+            console.log(user.city);
+        }
+        if(sel.value=="sex"){
+            console.log(user.sex);
+        }
+
+
+        //简单写法 就一行代码
+        //console.log($(sel).val());//jquer写法
+        //console.log(sel.value);//原声DOM写法
+
+        console.log(user[sel.value]);
+    }
+</script>
+</body>
+</html>

@@ -219,7 +219,7 @@
             console.log(filtername);//first,如果 team in teams|unique:second 则输出second
             var output = [],
                     keys = [];
-            angular.forEach(a, function (heshuitem) {
+            angular.forEach(a, function (heshuitem) {//a是 整个数组 形参heshuitem是 a的下一级
 
                 var key = heshuitem[filtername];
                 if (keys.indexOf(key) === -1) {
@@ -249,12 +249,12 @@
         heshuitem=$rootScope.heshuitem;
         return function (a, filtername) {
             var output = [];
-            angular.forEach(a, function (heshuitem) {
+            angular.forEach(a, function (b) {//b 是 a的下一级
 
-                var key = heshuitem[filtername];
-                // console.log(key);
+                var key = b[filtername];
+                 console.log(b);
                 if (key==2) {
-                    output.push(heshuitem);
+                    output.push(b);
                 }
             });
             return output;
@@ -267,7 +267,8 @@
             angular.forEach(a, function (heshuitem) {
 
                 var key = heshuitem[filtername];
-                // console.log(key);
+//                 console.log(a);
+//                 console.log(heshuitem);
                 if (key==4) {
                     output.push(heshuitem);
                 }

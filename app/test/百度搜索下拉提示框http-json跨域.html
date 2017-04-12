@@ -26,7 +26,7 @@
     https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=商品关键字
 </p>
 
-<input ng-focus="search()"ng-change="search()" ng-model="gjz" style="font-size:20px;width:500px;height:40px;outline: none;padding: 3px 5px;" type="text"><button>搜索</button>
+<input ng-change="search()" ng-model="gjz" style="font-size:20px;width:500px;height:40px;outline: none;padding: 3px 5px;" type="text"><button>搜索</button>
 <ul id="downList">
     <li ng-repeat="x in resdata">{{x}}</li>
 </ul>
@@ -49,47 +49,54 @@
                 dataType:'jsonp',
                 jsonp:"cb",//用百度接口的时候用cb  可能是百度设置的 常规的都是callback
                 success:function(data){
-                    console.log(data);
+//                    console.log(data);
                     $scope.resdata=data.s;
-                    console.log($scope.resdata);
+//                    console.log($scope.resdata);
                     $scope.$apply();//获取数据慢 获取完成再次脏检测
                     $scope.dList;
                     $scope.dList=$("#downList>li").length;
-                    console.log($scope.dList);
-                    if($scope.dList!=0){
-                        $scope.lindex=0;
+                    $scope.lindex=0;
+                    $("#downList>li").removeClass("selecthover");
+//                    console.log($scope.dList);
 
-                        $("input").keydown(function (event) {//上下键获取焦点
-                            var key = event.keyCode;
-                            if (key == 13) {}; /*回车搜索*/
-
-                            if (key == 40) {/*向下按钮*/
-                                $scope.lindex++;
-                                if ($scope.lindex > $scope.dList){
-                                    $scope.lindex = 1; //到底了
-                                }
-                                toggleMyClass()
-                            }else if (key == 38) { /*向上按钮*/
-                                $scope.lindex--;
-                                if ($scope.lindex == 0){
-                                    $scope.lindex = $scope.dList; //到顶了，
-                                }
-                                toggleMyClass()
-                            }
-                        });
-
-                        function toggleMyClass() {
-                            $("#downList>li:nth-child("+$scope.lindex+")").addClass("selecthover");
-                            $("#downList>li:nth-child("+$scope.lindex+")").siblings()
-                                    .removeClass("selecthover")
-                        }
-                    }
 
                 },
                 error:function(data){
                     console.log("error")
                 }
             });
+        };
+
+        $("input").keydown(function (event) {//上下键获取焦点
+            console.log($scope.dList,$scope.lindex);
+            if($scope.dList!=0){
+
+                var key = event.keyCode;
+                if (key == 13) {}; /*回车搜索*/
+
+                if (key == 40) {/*向下按钮*/
+                    $scope.lindex++;
+                    if ($scope.lindex > $scope.dList){
+                        $scope.lindex = 1; //到底了
+                    }
+//                alert(1);
+                    toggleMyClass()
+                }else if (key == 38) { /*向上按钮*/
+                    $scope.lindex--;
+                    if ($scope.lindex == 0){
+                        $scope.lindex = $scope.dList; //到顶了，
+                    }
+                    toggleMyClass()
+                }
+            }
+
+
+        });
+
+        function toggleMyClass() {
+            $("#downList>li:nth-child("+$scope.lindex+")").addClass("selecthover");
+            $("#downList>li:nth-child("+$scope.lindex+")").siblings()
+                    .removeClass("selecthover")
         }
 
 

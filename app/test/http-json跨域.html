@@ -8,12 +8,17 @@
     <title>Document</title>
     <script src="../lib/js/jquery.js"></script>
 </head>
-<body>
+<body ng-controller="allControl">
 
 <p>
     淘宝查询商品价格接口：http://suggest.taobao.com/sug?code=utf-8&q=商品关键字
 </p>
-
+<p>
+    百度搜索框下拉提示框api  注意 cb 代指callback百度自己设置的   常规都是callback
+    https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=商品关键字&json=1&p=3
+    https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=商品关键字
+</p>
+    <h2><a href="百度搜索下拉提示框http-json跨域.html">百度搜索下拉提示框http-json跨域.html</a></h2>
 </body>
 <script>
 
@@ -21,13 +26,16 @@
 //会在页面动态创建一个script  一直在页面显示
 
     var url="http://suggest.taobao.com/sug?code=utf-8&q=iphone&callback=test";
+    var urlbaidu="https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=as&cb=test";
+                        //这是搜索"as"  cb就是callback 但是百度这个API只能写cb不能写callback
+    var resdata;
     function kuayu(url){
         var ele=document.createElement("script");
         ele.type="text/javascript";
         ele.src=url;
         document.getElementsByTagName("head")[0].appendChild(ele)
     }
-    kuayu(url);
+    kuayu(urlbaidu);
 
     function test(res){//test就是callback返回的自定义函数可是说随便一个名字
         console.log(res);
@@ -38,16 +46,19 @@
 
     $.ajax({
         type:"get",
-        url:url,
+        url:"https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=as",
         dataType:'jsonp',
-        jsonp:"callback",
+//        jsonp:"callback",//用淘宝接口的时候用callback
+        jsonp:"cb",//用百度接口的时候用cb  可能是百度设置的 常规的都是callback
         success:function(data){
             console.log(data)
+            resdata=data
         },
         error:function(data){
             console.log("error")
         }
     });
+
     $.ajax({//这个就会报错说不允许
         type:"get",
         url:"http://suggest.taobao.com/sug?code=utf-8&q=iphone",
@@ -57,7 +68,10 @@
         error:function(data){
             console.log("error")
         }
-    })
+    });
+
+
+
 
 </script>
 </html>

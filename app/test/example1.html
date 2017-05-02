@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Solid Color demo</title>
+	<script type="text/javascript" src="../lib/js/jquery.js"></script>
+	<script type="text/javascript" src="../js/RangeSlider1.1min.js"></script>
+	<link rel="stylesheet" href="../css/slider1.css" type="text/css">
+</head>
+
+<body>
+<div id="test" style="margin:50px;border:1px solid #222;padding:20px">
+	<input type="range" value="0">
+</div>
+
+<script>
+
+    $('input').AnInputRange({ min: 0,   max: 100,  step: 0.1});
+    $('input').on("input",function(){
+        console.log("as")
+	});
+
+</script>
+</body>
+</html>

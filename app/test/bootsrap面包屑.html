@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../lib/css/bootstrap.css">
+    <title>Document</title>
+    <script src="../lib/js/jquery.js"></script>
+    <script src="../lib/js/angular.js"></script>
+    <script src="../lib/js/bootstrap.js"></script>
+</head>
+<style>
+
+</style>
+<body ng-controller="allControl">
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Brand</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<nav id="nav" class="navbar navbar-default" >
+    <!-- 小窗口展示的导航 -->
+    <div class="navbar-header">
+        <button id="an-btn" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#ananan">
+            <span class="sr-only">啊啊啊1</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <b href="javascript:;" ng-click="gotoPage('/mindex2')" class="weblogo onlylogo"></b>
+    </div>
+
+    <!-- 合并前展示的导航 -->
+    <div class="collapse navbar-collapse" id="ananan"  >
+        <ul class="nav navbar-nav ">
+            <li id="yunchanpin" class="an-dropdown">
+                <a  href="javascript:;" class="">云产品
+                    <i class="icon icon-u iconfont ">&#xe6a7;</i>
+                </a>
+            </li>
+            <li class="an-dropdown">
+                <a  href="javascript:;"  class="an-dropdown-toggle">解决方案
+                    <i class="icon icon-u iconfont ">&#xe6a6;</i>
+                    <i class="icon icon-d iconfont ">&#xe6a5;</i>
+                </a>
+                <ul class="an-dropdown-menu" style="display: none;" >
+                    <li class="an-dropdown">
+                        <a href="javascript:;" class="an-dropdown-toggle" >通用解决方案
+                            <i class="icon icon-u iconfont ">&#xe6a6;</i>
+                            <i class="icon icon-d iconfont ">&#xe6a5;</i>
+                        </a>
+                        <ul class="an-dropdown-menu" style="display: none;" >
+                            <li><a href="javascript:;"  ng-click="gotoPage('/mhhy')">混合云</a></li>
+                            <li><a href="javascript:;" ng-click="gotoPage('/msjzx')">数据中心</a></li>
+                        </ul>
+                    </li>
+                    <li class="an-dropdown">
+                        <a href="javascript:;" class="an-dropdown-toggle">行业解决方案
+                            <i class="icon icon-u iconfont ">&#xe6a6;</i>
+                            <i class="icon icon-d iconfont ">&#xe6a5;</i>
+                        </a>
+                        <ul class="an-dropdown-menu" style="display: none;" >
+                            <li><a href="javascript:;" ng-click="gotoPage('/mds')">电商OTO</a></li>
+                            <li><a href="javascript:;" ng-click="gotoPage('/mls')">零售业</a></li>
+                            <li><a href="javascript:;" ng-click="gotoPage('/mhjzx')">呼叫中心</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="an-dropdown">
+                <a href="javascript:;" class="an-dropdown-toggle">文档与支持
+                    <i class="icon icon-u iconfont ">&#xe6a6;</i>
+                    <i class="icon icon-d iconfont ">&#xe6a5;</i>
+                </a>
+                <ul class="an-dropdown-menu" style="display: none;" >
+                    <li class="dropdown">
+                        <a href="javascript:;" class="an-dropdown-toggle">推广合作
+                            <i class="icon icon-u iconfont ">&#xe6a6;</i>
+                            <i class="icon icon-d iconfont ">&#xe6a5;</i>
+                        </a>
+                        <ul class="an-dropdown-menu" style="display: none;" >
+                            <li><a href="javascript:;" ng-click="gotoPage('/mtgyhz')">推广合作</a></li>
+                            <li><a href="javascript:;" ng-click="gotoPage('/mtgyhz')">渠道伙伴</a></li>
+                        </ul>
+                    </li>
+                    <li class="an-dropdown">
+                        <a href="javascript:;" class="an-dropdown-toggle">文档
+                            <i class="icon icon-u iconfont ">&#xe6a6;</i>
+                            <i class="icon icon-d iconfont ">&#xe6a5;</i>
+                        </a>
+                        <ul class="an-dropdown-menu" style="display: none;" >
+                            <li><a href="javascript:;"ng-click="gotoPage('/mfwjj')">产品文档</a></li>
+                            <li><a href="javascript:;"ng-click="gotoPage('/mcaas01')">快速入门</a></li>
+                            <li><a href="javascript:;"ng-click="gotoPage('/mcjwt')">FAQ</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="an-dropdown">
+                <a href="javascript:;" class="an-dropdown-toggle">关于龙腾云
+                    <i class="icon icon-u iconfont ">&#xe6a6;</i>
+                    <i class="icon icon-d iconfont ">&#xe6a5;</i>
+                </a>
+                <ul class="an-dropdown-menu" style="display: none;" >
+                    <li class="dropdown">
+                        <a href="javascript:;" class="an-dropdown-toggle">新闻动态
+                            <i class="icon icon-u iconfont ">&#xe6a6;</i>
+                            <i class="icon icon-d iconfont ">&#xe6a5;</i>
+                        </a>
+                        <ul class="an-dropdown-menu" style="display: none;" >
+                            <li><a href="javascript:;" ng-click="gotoPage('/mnews')">新闻动态</a></li>
+                            <li><a href="javascript:;" ng-click="gotoPage('/mfwtk')">服务条款</a></li>
+                        </ul>
+                    </li>
+                    <li class="an-dropdown">
+                        <a href="javascript:;" class="an-dropdown-toggle">关于我们
+                            <i class="icon icon-u iconfont ">&#xe6a6;</i>
+                            <i class="icon icon-d iconfont ">&#xe6a5;</i>
+                        </a>
+                        <ul class="an-dropdown-menu" style="display: none;" >
+                            <li><a href="javascript:;"ng-click="gotoPage('/mlxwm')">联系我们</a></li>
+                            <li><a href="javascript:;"ng-click="gotoPage('/mgywm')">关于我们</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="onlybeian" class="dropdown"ng-click="gotoPage('/mbeian')" >
+                <a href="javascript:;">备案</a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+</body>
+<script>
+
+
+
+
+
+
+    var app=angular.module("app",[]);
+    app.controller("allControl",function($scope){
+
+
+
+    });
+
+</script>
+</html>

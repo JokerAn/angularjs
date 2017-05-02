@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>demo</title>
     <link href="http://cdn.bootcss.com/ionic/1.2.4/css/ionic.css" rel="stylesheet">
+    <link href="lib/css/bootstrap.css" rel="stylesheet">
 </head>
 <script src="lib/js/jquery.js"></script>
 <style>
@@ -14,11 +15,14 @@
         clear: both;
         visibility: hidden;
     }
+    input[type=range]:focus {
+        outline: none;
+    }
     /*横条样式*/
     input[type=range] {
         padding:0 0 0 0;
         -webkit-appearance: none;/*清除系统默认样式*/
-        width: 100%;
+        width: 400px;
         background: -webkit-linear-gradient(#111, blue) no-repeat, #ddd;/*设置左边颜色为#61bd12，右边颜色为#ddd*/
         background-size: 1% 100%;/*设置左右宽度比例*/
         height: 10px;/*横条的高度*/
@@ -40,19 +44,29 @@
 <body>
 <div class="clear" style="padding-bottom:10px">
     <input style="margin:20px 0 0 20px" class="a1 " type="range" max="100" value="1" min="1" id="check">
-
+    <div id="h-slider" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"><div class="ui-slider-range ui-widget-header" style="left: 0%; width: 55%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;display: none;"></a><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 55%;"></a></div>
 </div>
 
 <p>ss</p>
 <a href="test/http-json跨域.html">http-json跨域.html</a>
+<a href="test/input-range.html">滑块</a>
+<a href="test/example.html">渐变色</a>
+<a href="test/example1.html">渐变色1</a>
+<a href="test/flex.html">flex</a>
+
 </body>
 <script>
-    $(document).on("mousemove","input[type='range']",function(){
-        var a=$(this).val()+"%";
-        $(this).css({
+    function huadong(e){
+        var www=$(e.target);
+        console.log(www);
+        var a=www.val()+"%";
+        www.css({
             "background-size":a+" 100%"
         });
-        console.log($(this).css("background-size"));
+        console.log(www.css("background-size"));
+    }
+    $("input[type='range']").on("input",function(e){
+        huadong(e)
     })
 
 </script>

@@ -1,0 +1,372 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>demo</title>
+    <!--<link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">    <link href="lib/css/bootstrap.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="../lib/css/bootstrap.css">
+    <link rel="stylesheet" href='../css/font-awesome.css'>
+</head>
+<script src="../lib/js/jquery.js"></script>
+<style>
+    .clear:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+
+    input[type=range]:focus {
+        outline: none;
+    }
+
+    /*横条样式*/
+    input[type=range] {
+        padding: 0 0 0 0;
+        -webkit-appearance: none; /*清除系统默认样式*/
+        width: 400px;
+        background: -webkit-linear-gradient(#111, blue) no-repeat, #ddd; /*设置左边颜色为#61bd12，右边颜色为#ddd*/
+        background-size: 1% 100%; /*设置左右宽度比例*/
+        height: 10px; /*横条的高度*/
+    }
+
+    /*拖动块的样式*/
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none; /*清除系统默认样式*/
+        height: 26px; /*拖动块高度*/
+        width: 15px; /*拖动块宽度*/
+        /*background: #333;!*拖动块背景*!*/
+        background: url("../images/an-input.png") no-repeat center center;
+        background-size: 111% 117%;
+        top: 1px;
+        /*border-radius: 50%; !*外观设置为圆形*!*/
+        border: solid 1px #0079E1; /*设置边框*/
+        overflow: hidden;
+    }
+</style>
+<body>
+<h1>官网: <a href="http://fontawesome.dashgame.com/">http://fontawesome.dashgame.com/</a></h1>
+<h2>可单独使用与bootstrap完全没联系 只是一起使用效果更好</h2>
+<h3>将官网文件下载下来 找到里面的fonts文件夹 复制到项目</h3>
+<h3>将官网文件下载下来 找到里面的css文件夹 复制到项目</h3>
+<h3>
+    <pre>
+        <code class="html">
+            <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span
+                class="na">href=</span><span class="s">"css/font-awesome.min.css"</span><span class="nt">&gt;</span>
+        </code>
+    </pre>
+</h3>
+<h3>或者直接什么都不下载 直接引一个链接就行了
+    <pre>
+        <code class="html">
+            <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"</span> <span
+                class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+        </code>
+    </pre>
+</h3>
+使用 fa-lg (33%递增)、fa-2x、 fa-3x、fa-4x，或者 fa-5x 类 来放大图标。<br>
+<i class="fa fa-camera-retro fa-lg"></i> fa-lg
+<i class="fa fa-camera-retro fa-2x"></i> fa-2x
+<i class="fa fa-camera-retro fa-3x"></i> fa-3x
+<i class="fa fa-camera-retro fa-4x"></i> fa-4x
+<i class="fa fa-camera-retro fa-5x"></i> fa-5x
+
+<hr>
+使用 fa-fw 可以将图标设置为一个固定宽度。主要用于不同宽度图标无法对齐的情况。
+尤其在列表或导航时起到重要作用。<br>
+
+
+<div class="list-group">
+    <a class="list-group-item" href="#"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a>
+    <a class="list-group-item" href="#"><i class="fa fa-book fa-fw"></i>&nbsp; Library</a>
+    <a class="list-group-item" href="#"><i class="fa fa-pencil fa-fw"></i>&nbsp; Applications</a>
+    <a class="list-group-item" href="#"><i class="fa fa-cog fa-fw"></i>&nbsp; Settings</a>
+</div>
+
+<hr>
+使用 fa-ul 和 fa-li 便可以简单的将无序列表的默认符号替换掉。<br>
+
+<ul class="fa-ul">
+    <li><i class="fa-li fa fa-check-square"></i>List icons</li>
+    <li><i class="fa-li fa fa-check-square"></i>can be used</li>
+    <li><i class="fa-li fa fa-spinner fa-spin"></i>as bullets</li>
+    <li><i class="fa-li fa fa-square"></i>in lists</li>
+</ul>
+<hr>
+使用 fa-spin 类来使任意图标旋转，现在您还可以使用 fa-pulse 来使其进行8方位旋转。
+尤其适合 fa-spinner、fa-refresh 和 fa-cog 。<br>
+<i class="fa fa-spinner fa-spin"></i>
+<i class="fa fa-circle-o-notch fa-spin"></i>
+<i class="fa fa-refresh fa-spin"></i>
+<i class="fa fa-cog fa-spin"></i>
+<i class="fa fa-spinner fa-pulse"></i>
+
+<hr>
+使用 fa-rotate-* 和 fa-flip-* 类可以对图标进行任意旋转和翻转。<br>
+<i class="fa fa-shield"></i> normal<br>
+<i class="fa fa-shield fa-rotate-90"></i> fa-rotate-90<br>
+<i class="fa fa-shield fa-rotate-180"></i> fa-rotate-180<br>
+<i class="fa fa-shield fa-rotate-270"></i> fa-rotate-270<br>
+<i class="fa fa-shield fa-flip-horizontal"></i> fa-flip-horizontal<br>
+<i class="fa fa-shield fa-flip-vertical"></i> icon-flip-vertical
+
+<hr>
+
+如果想要将多个图标组合起来，使用 fa-stack 类作为父容器， fa-stack-1x 作为正常比例的图标，
+fa-stack-2x 作为大一些的图标。还可以使用 fa-inverse 类来切换图标颜色。您可以在父容器中
+通过添加 大图标 类来控制整体大小。<br>
+<span class="fa-stack fa-lg">
+  <i class="fa fa-square-o fa-stack-2x"></i>
+  <i class="fa fa-twitter fa-stack-1x"></i>
+</span>
+fa-twitter on fa-square-o<br>
+<span class="fa-stack fa-lg">
+  <i class="fa fa-circle fa-stack-2x"></i>
+  <i class="fa fa-flag fa-stack-1x fa-inverse"></i>
+</span>
+fa-flag on fa-circle<br>
+<span class="fa-stack fa-lg">
+  <i class="fa fa-square fa-stack-2x"></i>
+  <i class="fa fa-terminal fa-stack-1x fa-inverse"></i>
+</span>
+fa-terminal on fa-square<br>
+<span class="fa-stack fa-lg">
+  <i class="fa fa-camera fa-stack-1x"></i>
+  <i class="fa fa-ban fa-stack-2x text-danger"></i>
+</span>
+fa-ban on fa-camera
+
+<hr>
+与bootstrap相结合使用<br>
+<a class="btn btn-danger" href="#">
+    <i class="fa fa-trash-o fa-lg"></i> Delete</a>
+<a class="btn btn-default btn-sm" href="#">
+    <i class="fa fa-cog"></i> Settings</a>
+
+<a class="btn btn-lg btn-success" href="#">
+    <i class="fa fa-flag fa-2x pull-left"></i> Font Awesome<br>Version 4.7.0</a>
+
+<div class="btn-group">
+    <a class="btn btn-default" href="#"><i class="fa fa-align-left"></i></a>
+    <a class="btn btn-default" href="#"><i class="fa fa-align-center"></i></a>
+    <a class="btn btn-default" href="#"><i class="fa fa-align-right"></i></a>
+    <a class="btn btn-default" href="#"><i class="fa fa-align-justify"></i></a>
+</div>
+
+<div class="input-group margin-bottom-sm">
+    <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+    <input class="form-control" type="text" placeholder="Email address">
+</div>
+<div class="input-group">
+    <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+    <input class="form-control" type="password" placeholder="Password">
+</div>
+
+<div class="btn-group open">
+    <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> User</a>
+    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+        <span class="fa fa-caret-down"></span></a>
+    <ul class="dropdown-menu">
+        <li><a href="#"><i class="fa fa-pencil fa-fw"></i> Edit</a></li>
+        <li><a href="#"><i class="fa fa-trash-o fa-fw"></i> Delete</a></li>
+        <li><a href="#"><i class="fa fa-ban fa-fw"></i> Ban</a></li>
+        <li class="divider"></li>
+        <li><a href="#"><i class="i"></i> Make admin</a></li>
+    </ul>
+</div>
+<hr>
+
+<br>
+
+
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<div class="clear" style="padding-bottom:10px">
+    <input style="margin:20px 0 0 20px" class="a1 " type="range" max="100" value="1" min="1" id="check">
+    <div id="h-slider" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+         aria-disabled="false">
+        <div class="ui-slider-range ui-widget-header" style="left: 0%; width: 55%;"></div>
+        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;display: none;"></a><a
+            class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 55%;"></a></div>
+</div>
+
+<p>ss</p>
+<a href="test/http-json跨域.html">http-json跨域.html</a>
+<a href="test/input-range.html">滑块</a>
+<a href="test/example.html">渐变色</a>
+<a href="test/example1.html">渐变色1</a>
+<a href="test/flex.html">flex</a>
+<hr>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 10px;
+    }
+
+    #mainBody {
+        /*width:950px;*/
+        /*margin:0 auto;*/
+        border: 1px solid #ccc;
+        padding: 5px;
+        /*position:relative;*/
+        overflow: hidden;
+        height: 1%;
+    }
+
+    #layoutContainer {
+        float: left;
+        width: 100%;
+    }
+
+    #leftCol {
+        width: 120px;
+        height: 200px;
+        border: 1px solid #ccc;
+        background-color: #f0f0f0;
+        float: left;
+    }
+
+    #rightCol {
+        border: 1px solid #ccc;
+        background-color: #f0ffff;
+        height: 300px;
+        margin-left: 127px;
+    }
+
+    .breatLight {
+        width: 100px;
+        height: 100px;
+        display: inline-block;
+        position: relative;
+        border: 1px solid #111;
+        border-radius: 50%;
+        top: 3px;
+        margin: 0 3px;
+        animation: mymove 3s;
+        animation-iteration-count: infinite;
+    }
+
+    .breatLight-brown {
+        background: brown;
+    }
+
+    @keyframes mymove {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(.4);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    @-webkit-keyframes mymove /* Safari and Chrome */
+    {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(.4);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    div.change {
+        border: 2px solid;
+        padding: 10px 40px;
+        width: 300px;
+        resize: both;
+        overflow: auto;
+    }
+</style>
+
+<div class="breatLight breatLight-brown">
+
+</div>
+<div class="change">可以自己调整div大小</div>
+<div id="mainBody">
+    <div id="layoutContainer">
+        <div id="leftCol">
+        </div>
+        <div id="rightCol">
+        </div>
+    </div>
+</div>
+<hr>
+<div>
+    <div style="width: 100px;height:200px;background: #000;float:left">
+        adsfadf <br>
+        adsfadf <br>
+        adsfadf <br>
+        adsfadf <br>
+        adsfadf <br>
+        adsfadf <br>
+        adsfadf <br>
+        adsfadf <br>
+        adsfadf <br>
+        adsfadf <br>
+    </div>
+    <div style="margin-left:120px;background: blue;height:300px">
+        adfadfasf <br>
+        adfadfasf <br>
+        adfadfasf <br>
+
+        adfadfasf <br>
+        adfadfasf <br>
+        啊所发生的发生的阿萨德爱的发生的asf <br>
+    </div>
+    <hr>
+</div>
+
+<div style="height:3000px;width: 100px;">s</div>
+<div>
+    <div style="width: 100px;height:200px;background: #000;float: right;">
+        adsfadf <br>
+        adsfadf <br>
+        adsfadf <br>
+        adsfadf <br>
+        adsfadf <br>
+        adsfadf <br>
+        adsfadf <br>
+        adsfadf <br>
+        adsfadf <br>
+        adsfadf <br>
+    </div>
+    <div style="margin-right:120px;background: blue;height:300px">
+        <p>asdfasdfadf</p>
+        <div>啊所发生的发生的阿萨德爱的发生的asf <br></div>
+
+    </div>
+    <hr>
+
+</div>
+</body>
+<script>
+    function huadong(e) {
+        var www = $(e.target);
+        console.log(www);
+        var a = www.val() + "%";
+        www.css({
+            "background-size": a + " 100%"
+        });
+        console.log(www.css("background-size"));
+    }
+    $("input[type='range']").on("input", function (e) {
+        huadong(e)
+    })
+
+</script>
+</html>

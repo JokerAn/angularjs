@@ -2,7 +2,7 @@
 	-webkit-appearance: none;
 	width: 400px;
 	/*border-radius: 10px; !*这个属性设置使填充进度条时的背景颜色为圆角*!*/
-	background: -webkit-linear-gradient(#000, #059CFA) no-repeat;/*背景颜色*/
+	background: -webkit-linear-gradient(#000, #fff) no-repeat;/*背景颜色*/
 	background-size: 0% 100%;
 }
 

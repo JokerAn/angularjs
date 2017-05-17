@@ -1,0 +1,989 @@
+<%@ page language="java" pageEncoding="UTF-8" %>
+<%@ taglib uri="/struts-tags" prefix="s"%>
+<!DOCTYPE  HTML>
+<html>
+<head>
+    <title><s:text name="sys.console.title" /></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=1300" />
+    <meta name="description" content="<s:property value="%{getText('sys.description')}" />" />
+    <meta name="keywords" content="<s:property value="%{getText('sys.keywords')}" />" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="../js/jquery-1.11.3.min.js"></script>
+    <script src="../js/underscore.js"></script>
+    <link type="image/x-icon" rel="icon" href="<s:property value="%{getText('img.favicon')}" />" />
+
+    <link href="js/jqueryui/jquery-ui.min.css" rel="stylesheet" type="text/css">
+</head>
+<style>
+    html body {
+        overflow: visible;
+    }
+
+    .an-clear::after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+    h1.sdn-h1 {
+        background: #000;
+        margin: 0;
+        color: #fff;
+        padding: 5px 0px 5px 30px;
+    }
+
+    .sdn-table tr {
+        height: 42px;
+    }
+
+    .sdn-table tr input {
+        padding: 4px 7px;
+    }
+
+    .sdn-table tr input[type="radio"] {
+        position: relative;
+        top: 3px;
+        margin: 0 2px 0 10px;
+    }
+
+    .cav-dian {
+        font-size: 18px;
+    }
+
+    .cav-dian-content {
+        font-size: 14px;
+        color: #333;
+        padding: 15px 30px;
+    }
+
+    .cav-xudian-an {
+        font-size: 16px;
+    }
+
+    .cav-xudian-an li, .ul-li-downline li {
+        padding: 10px 0;
+        font-size: 12px;
+        color: #2a2d2e;
+        border-bottom: 1px solid #f3f3f3;
+    }
+
+    .an-width120 {
+        display: inline-block;
+        width: 120px;
+        text-align: left;
+        /*text-align: justify;*/
+        /*text-align-last: justify;*/
+        margin-right: 10px;
+    }
+
+    .an-width170 {
+        display: inline-block;
+        width: 170px;
+        text-align: justify;
+        text-align-last: justify;
+        margin-right: 40px;
+        padding-left: 25px;
+    }
+
+    .an-sdn-title {
+        color: #58666e;
+        font-size: 15px;
+        font-weight: 700;
+        margin: 11px 0 10px 0;
+        padding: 0 20px 0 22px;
+        display: inline-block;
+        line-height: 40px;
+    }
+</style>
+<style>
+    .clear:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+
+    #an-input-range input[type=range] {
+        margin: 0;
+        padding: 0;
+        -webkit-appearance: none;
+        width: 200px;
+        height: 20px;
+        border-radius: 0; /*这个属性设置使填充进度条时的背景颜色为圆角*/
+        background: -webkit-linear-gradient(#CFEAF8, #CFEAF8) no-repeat; /*背景颜色*/
+        background-size: 10% 100%;
+    }
+
+    #an-input-range input[type=range]:focus {
+        outline: none;
+    }
+
+    #an-input-range input[type=range]::-webkit-slider-runnable-track { /*大底层*/
+
+        border: 1px solid #ddd;
+        /*border-radius: 10px; !*将整个大轨道设为圆角的*!*/
+        /*box-shadow: 0 1px 1px #def3f8, inset 0 .125em .125em #0d1112; !*  轨道内置阴影效果*!*/
+    }
+
+    #an-input-range input[type=range]::-webkit-slider-thumb { /*拖动块的样式*/
+        -webkit-appearance: none; /*清除系统默认样式*/
+        height: 25px;
+        width: 15px;
+        margin-top: -5px; /*使滑块超出轨道部分的偏移量相等*/
+        background: #1C82B4;
+        /*border-radius: 50%; !*外观设置为圆形*!*/
+        border-radius: 2px; /*外观设置为圆形*/
+        border: 1px solid rgb(28, 130, 180); /*设置边框*/
+        box-shadow: 0 .125em .125em #3b4547; /*添加底部阴影*/
+    }
+
+    #an-input-range input[type=range]::-moz-range-track {
+        border: 1px solid #ddd;
+        /*border-radius: 10px; !*将轨道设为圆角的*!*/
+        /*box-shadow: 0 1px 1px #def3f8, inset 0 .125em .125em #0d1112; !*轨道内置阴影效果*!*/
+    }
+
+    #an-input-range input[type=range]::-moz-range-thumb {
+        appearance: none;
+        height: 25px;
+        width: 15px;
+        margin-top: -5px; /*使滑块超出轨道部分的偏移量相等*/
+        background: #1C82B4;
+        border-radius: 2px; /*外观设置为圆形*/
+        border: 1px solid rgb(28, 130, 180); /*设置边框*/
+        box-shadow: 0 .125em .125em #3b4547; /*添加底部阴影*/
+    }
+
+    #an-input-range input[type=range]::-moz-range-progress {
+        background: -webkit-linear-gradient(#CFEAF8, #CFEAF8) no-repeat; /*背景颜色*/
+        height: 20px;
+        /*border-radius: 10px;*/
+    }
+
+    #an-input-range input[type=range]::-ms-track {
+        /*height: 25px;*/
+        /*border-radius: 10px;*/
+        /*box-shadow: 0 1px 1px #def3f8, inset 0 .125em .125em #0d1112;*/
+        /*border-color: transparent; !*去除原有边框*!*/
+        /*color: transparent; !*去除轨道内的竖线*!*/
+    }
+
+    #an-input-range input[type=range]::-ms-thumb {
+        height: 25px;
+        width: 15px;
+        border-radius: 2px;
+        border: 1px solid rgb(28, 130, 180); /*设置边框*/
+        margin-top: -5px;
+        box-shadow: 0 .125em .125em #3b4547;
+    }
+
+    /*#an-input-range input[type=range]::-ms-fill-lower {*/
+    /*!*进度条已填充的部分*!*/
+    /*height: 22px;*/
+    /*!*border-radius: 10px;*!*/
+    /*background: linear-gradient(#059CFA, #059CFA) no-repeat;*/
+    /*}*/
+
+    /*#an-input-range input[type=range]::-ms-fill-upper {*/
+    /*!*进度条未填充的部分*!*/
+    /*height: 22px;*/
+    /*border-radius: 10px;*/
+    /*background: #ffffff;*/
+    /*}*/
+
+    /*#an-input-range input[type=range]:focus::-ms-fill-lower {*/
+    /*background: linear-gradient(#059CFA, #059CFA) no-repeat;*/
+    /*}*/
+
+    /*#an-input-range input[type=range]:focus::-ms-fill-upper {*/
+    /*background: #ffffff;*/
+    /*}*/
+</style>
+<style>
+    #an-table-wenhao {
+        position: relative
+    }
+
+    .an-wen {
+        position: absolute;
+        width: 171px;
+        padding: 6px 5px;
+        border: 1px solid #ddd;
+        display: none;
+        z-index: 1000;
+        background: #eee;
+        font-size: 14px;
+    }
+
+    .an-wen01 {
+        left: 357px;
+        top: 4px;
+    }
+
+    .an-wen02 {
+        left: 310px;
+        top: 45px;
+    }
+
+    .an-wen03 {
+        left: 310px;
+        top: 45px;
+    }
+
+    /*#an-sdn-div-table .an-imgwen01:hover .an-wen01{*/
+    /*display: block;*/
+    /*}*/
+    /*#an-sdn-div-table .an-imgwen02:hover .an-wen02{*/
+    /*display: block;*/
+    /*}*/
+    /*#an-sdn-div-table .an-imgwen03:hover .an-wen03{*/
+    /*display: block!important;*/
+    /*}*/
+    .an-imgwen {
+        width: 18px;
+        height: 18px;
+        position: relative;
+        top: 4px;
+    }
+
+    .an-wenclose {
+        float: right;
+        border: 1px solid #ddd;
+        /* width: 10px; */
+        /* height: 10px; */
+        border-radius: 50%;
+        margin: -12px -10px 0 0px;
+        padding: 1px 4px;
+        background: #aaa;
+        cursor: pointer;
+    }
+
+    .an-pricestyle {
+        color: #666eee;
+        font-size: 16px;
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    .breatLight {
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        position: relative;
+        border: 3px solid #ddd;
+        border-radius: 50%;
+        top: 3px;
+        margin: 0 8px 0 0;
+
+    }
+
+    .breatLight-c09853 {
+        background: #c09853;
+        animation: mymove 1.4s;
+        animation-iteration-count: infinite;
+    }
+
+    .breatLight-468847 {
+        background: #468847;
+    }
+
+    @keyframes mymove {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(.4);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    @-webkit-keyframes mymove {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(.4);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .divline {
+        width: 100%;
+        height: 1px;
+        border-top: 1px solid #f3f3f3;
+        margin: 10px 0
+    }
+
+</style>
+<body>
+<s:include value="%{getText('jsp.console.head')}"/>
+<script type="text/javascript" src="../js/h_abtnhover2.js" charset="utf-8"></script>
+
+<script type="text/javascript" src="js/jqueryui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/js/tools.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/zrender/esl.js"></script>
+<div class="content max" style="margin:0;  overflow: hidden;">
+    <div class="h_content_lfnav">
+        <s:action executeResult="true" name="consolehomeleftMenu"/>
+    </div>
+    <div class="wrapper page h_contentbox fr" style="height:100%;">
+        <div class="h_console_yjsbox">
+            <div class="h_jumpbox fl" >
+                <a class="h_customer1" href="overview">控制台</a><span>/</span>&nbsp;&nbsp;
+                <a class="h_pandect_1" href="javascript:;">可视化</a>
+            </div>
+            <%-- <s:include value="%{getText('jsp.console.navigation')}"/> --%>
+
+
+            <div class="fl an-clear" style="width: 100%;">
+                <%--<div class="page-intro instances" style="position:relative;">--%>
+                <%--&lt;%&ndash;<p class="lead">&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;龙腾云™平台为广业用户提供（软件定义网络）服务。&ndash;%&gt;--%>
+                    <%--</div>--%>
+
+                <div class="pane" style="position:relative; min-height: 470px;background: #f1f4f6">
+
+                    <div style="display:inline-block;margin-top:-10px;height:100%;width:100%; position:absolute;left:0;top:0;  padding-top: 20px;"
+                         class="fl an-clear">
+                        <!-- 右侧基础信息 -->
+                        <div style="float: right;">
+                            <div style=" position:relative;width: 340px;min-height: 300px; background: #fff;box-sizing: border-box;padding:0 10px;"
+                                 id="detail">
+                                <div class="description page-create-ttpl-config" style="height: 559px;">
+                                    <div class="detail-item">
+                                        <div class="title">
+                                            <h3>资源配置</h3>
+                                        </div>
+                                    </div>
+                                    <dl class="dl-horizontal">
+                                        <dt>名称</dt>
+                                        <dd></dd>
+                                        <dt>描述</dt>
+                                        <dd>无</dd>
+                                    </dl>
+                                </div>
+
+                            </div>
+                            <div style="width: 340px;min-height: 170px; background: #fff;box-sizing: border-box;padding:0 10px;margin:10px 0;">
+                                一些介绍性文字，怎么操作什么的。。。。。
+                            </div>
+                        </div>
+
+
+                        <!-- 左侧图 -->
+                        <div style="margin-right: 350px">
+                            <div id="container2" style="height:580px; position: absolute;background-color: #FFFFFF">
+                            </div>
+                            <div id="container" style="height:580px;"></div>
+                            <div id="tooltips" style="cursor: pointer; position: absolute;
+                        display: none; border: 0px solid rgb(51, 51, 51);
+                         white-space: nowrap; z-index: 9999999;
+                          transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+                          top 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+                          border-radius: 4px; color: rgb(255, 255, 255); font-style: normal;
+                           font-variant: normal; font-weight: normal; font-stretch: normal;
+                           font-size: 14px; line-height: 21px; font-family: sans-serif;
+                            padding: 5px; left: 245.234375px; top: 119px;
+                             background-color: rgba(50, 50, 50, 0.701961);">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<script type="text/javascript" src="/js/sdn/graphic2.js" charset="utf-8"></script>
+<style>
+    .an-dropdown-text {
+        text-indent: 0;
+        text-align: center;
+        color: #58666e;
+        background: 0 0;
+        border: 0;
+        cursor: pointer;
+    }
+
+    .sdn-dropdown {
+        float: right;
+    }
+
+    .sdn-dropdown .an-dropdown-text {
+        width: 70px;
+        padding: 20px 0 0 0;
+    }
+
+    .an-icon-menu {
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .an-sdndropdowncontent {
+        position: absolute;
+        top: 40px;
+        right: 0;
+        width: 140px;
+        padding: 0 10px;
+        display: none;
+    }
+
+    .an-sdndropdowncontent li {
+        box-sizing: border-box;
+
+    }
+
+    .an-sdndropdowncontent li a {
+        display: inline-block;
+        width: 140px;
+        text-align: left;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+        box-sizing: border-box;
+
+    }
+
+    .an-sdndropdowncontent li:hover {
+        color: #fff;
+        background: #292c37;
+    }
+
+    body .tanchuclose {
+        display: inline-block;
+        width: 40px;
+        height: 44px;
+        background: #000;
+        border: none;
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+</style>
+<script type="text/template" id="node_tpl">
+
+
+    <div style=""><%--  点击小圆点 --%>
+        <span class="cav-dian an-sdn-title">基本属性</span>
+        <div class="sdn-dropdown">
+            <div class="an-dropdown-text">
+                <span class="icon-menu an-icon-menu"></span>
+            </div>
+        </div>
+        <br>
+        <@ if (data.type.indexOf("self") != -1) {@>
+        <div class="cav-dian-content">
+            <ul class="an-sdndropdowncontent">
+                <li>
+                    <a class="btn" href="javascript:;"
+                       data-template="modify_description_tpl" data-action="modifyUserPortDescription">
+                        <span class="fa fa-trash-o"></span>
+                        <span>修改</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="btn" href="javascript:;"
+                       data-template="delete_port_tpl">
+                        <span class="fa fa-trash-o"></span>
+                        <span>删除</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="btn" href="javascript:;"
+                       data-mark="monitor_port">
+                        <span class="fa fa-eye"></span>
+                        <span>监控</span>
+                    </a>
+
+                    <%-- <a class="btn" href="#">
+                    <span class="icon icon-clone"></span>
+                    <span class="text">基于该模板新建</span>
+                </a>--%>
+                </li>
+
+
+            </ul>
+
+            <ul class="ul-li-downline">
+                <li>
+                    <span class="an-width120">接入类型</span><@ if (data.type.indexOf("vlan") != -1) {@>
+                    <span>中继</span>
+                    <@ }else{@>
+                    <span>终端</span>
+                    <@ }@>
+                </li>
+                <li>
+                    <span class="an-width120">名称</span><span style="color: #222aaa;" contenteditable="true"
+                                                             data-action="modifyUserPortDescription"><@=data.name@></span>
+                </li>
+                <li>
+                    <span class="an-width120">状态</span><span><b class="breatLight breatLight-468847"></b> 已开通</span>
+                </li>
+                <li>
+                    <span class="an-width120">联系人</span><span> <@=data.object.customerName@></span>
+                </li>
+                <li>
+                    <span class="an-width120">联系电话</span><span> <@=data.object.customerPhoneNum@></span>
+                </li>
+                <li>
+                    <span class="an-width120">描述</span><span><@=data.object.content@></span>
+                </li>
+                <li>
+                    <span class="an-width120">标签</span><span><@=data.object.label@></span>
+                </li>
+            </ul>
+        </div>
+
+
+        <@}else {@>
+        <div class="cav-dian-content" style=" line-height: 20px;
+        background: #dde;">
+            TelCloud ISP（TelCloud ISP
+            connect）互联网云接入服务，为企业用户提供SDN互联网络云接入服务。用户可在云平台线上秒级完成带宽大小调整，流量查询，带宽加速，弹性计费等操作，从而获得比传统运营商更有优势的带宽价格和带宽质量。
+        </div>
+        <@ }@>
+    </div>
+
+
+</script>
+
+<script type="text/template" id="node_temp_tpl">
+    <span class="cav-dian an-sdn-title">基本属性</span>
+    <div class="sdn-dropdown">
+        <div class="an-dropdown-text">
+            <span class="icon-menu an-icon-menu"></span>
+        </div>
+    </div>
+    <div class="cav-dian-content"><!--234-->
+        <ul class="ul-li-downline">
+            <li>
+                <span class="an-width120">名称</span>
+                <span><@=data.object.title@></span>
+            </li>
+            <li>
+                <span class="an-width120">申请时间 </span><span><@=(new Date(data.object.applyTime)).Format("yyyy-MM-dd hh:mm:ss")@></span>
+            </li>
+            <li>
+                <span class="an-width120">状态 </span>
+                <@ if (data.object.status == 0) {@>
+                <span><b class="breatLight breatLight-c09853"></b>待审核 </span>
+                <@ }else if (data.object.status == 1) { @>
+                <span><b class="breatLight breatLight-c09853"></b>申请通过，待交费</span>
+                <br>
+                <div class="divline"></div>
+                <span class="an-width120">待缴金额 </span>
+                <span style="color: #222ddd;"><@=data.object.price@></span>￥<i data-pay>ss</i>
+                <%--<input class="btn btn-lg" type="button" value="支付" />--%>
+                <@ }else if (data.object.status == 2) { @>
+                <span><b class="breatLight breatLight-c09853"></b>已交费，待开通</span>
+                <@ } @>
+            </li>
+            <li>
+                <span class="an-width120">接入类型 </span>
+                <span>
+                <@ if (data.object.portType == 0) {@>
+                    终端
+                <@ }else if (data.object.portType == 1) { @>
+                    中继
+                <@ } @>
+            </span>
+            </li>
+            <li>
+                <span class="an-width120">联系人 </span><span><@=data.object.customerName@></span>
+            </li>
+            <li>
+                <span class="an-width120">联系电话 </span><span><@=data.object.customerPhoneNum@></span>
+            </li>
+            <li>
+                <span class="an-width120">标签 </span><span><@=data.object.content@></span>
+            </li>
+        </ul>
+
+    </div>
+
+
+</script>
+
+<script type="text/template" id="flow_tpl"><%--  点击线条 --%>
+<div>
+    <span class="cav-dian an-sdn-title">流属性</span>
+    <div class="sdn-dropdown">
+        <div class="an-dropdown-text">
+            <span class="icon-menu an-icon-menu"></span>
+        </div>
+    </div>
+    <ul class="an-sdndropdowncontent">
+        <li>
+            <a class="btn" href="javascript:;"
+               data-template="modify_description_tpl" data-action="modifyUserFlowDescription">
+                <span class="fa fa-trash-o"></span>
+                <span>修改</span>
+            </a>
+        </li>
+        <li>
+            <a class="btn" href="javascript:;" data-template="modify_bandwidth_tpl" data-action="modifyUserFlowBandWidth">
+                <span class="fa fa-edit"></span>
+                <span>调整带宽</span>
+            </a>
+
+        </li>
+        <li>
+            <a class="btn" href="javascript:;" data-action="removeUserFlow">
+                <span class="fa fa-trash-o"></span>
+                <span>删除</span>
+            </a>
+        </li>
+
+
+    </ul>
+</div>
+<ul class="ul-li-downline" style="margin-bottom: 15px;padding:0 30px">
+    <li><span class="an-width120">流ID</span><span><@=data.object.flow.id@></span></li>
+    <li><span class="an-width120">流名称</span><span><@=data.object.flow.description@></span></li>
+    <li><span class="an-width120">流描述</span><span><@=data.object.label@></span></li>
+    <li><span class="an-width120">带宽</span><span><@=parseInt(data.object.flow.maxBandwidth)@>MB</span></li>
+</ul>
+
+
+<%--<div style="margin:20px 0 0 55px">--%>
+    <%--<a style="margin:0 55px 0 0" class="btn" href="javascript:;" data-action="modifyUserFlowBandWidth">修改</a>--%>
+    <%--<a class="btn" href="javascript:;" data-action="removeUserFlow">删除</a>--%>
+    <%--</div>--%>
+</script>
+
+
+<script type="text/template" id="modify_description_tpl">
+
+    <div data-main
+         style="z-index: 999999;position: absolute;top: 20%;left: 30%;background: #FFFFFF;border: 1px solid #999;">
+        <h1 class="sdn-h1" style="font-size:16px;">修改基本信息
+            <input class="fr tanchuclose" type="button" data-cancel value="x">
+        </h1>
+        <form>
+            <div style="padding: 26px 72px;    font-size: 14px;">
+                <@ for(var i=0;i<keys.length;i++){
+                var key = keys[i],value = values[i];
+                if(key.type == 'textarea'){@>
+                <p>
+                    <@=key.cname@> <textarea name="<@=key.name@>"><@=value@></textarea>
+                </p>
+                <@}else{@>
+                <p>
+                    <@=key.cname@> <input type="<@=key.type@>" name="<@=key.name@>" value="<@=value@>" >
+                </p>
+                <@}@>
+                <@}@>
+
+
+                <p style="    text-indent: 42px;padding-top: 12px;margin-bottom: -26px;">
+                    <input class="btn" type="button" data-submit value="确定">
+                    <input class="btn" type="button" data-cancel value="取消">
+                </p>
+            </div>
+        </form>
+
+
+    </div>
+
+</script>
+
+<script type="text/template" id="modify_bandwidth_tpl">
+
+    <div data-main
+         style="z-index: 999999;position: absolute;top: 20%;left: 30%;background: #FFFFFF;border: 1px solid #999;">
+        <h1 class="sdn-h1" style="font-size:16px;">
+            调整带宽
+            <input class="fr tanchuclose" type="button" data-cancel value="x">
+
+        </h1>
+        <form>
+            <div style="padding:0 20px 20px 20px">
+                <div class="fdl" style="padding: 20px 0px 5px 0;">
+                    <div class="panel-inner">
+                        <div style="width: 350px;" class="slider slider-horizontal">
+                            <div name="slider-range-bandwidth"></div>
+                        </div>
+                        <input class="preview mini" name="bandwidth" value="<@=bandwidth@>" type="text">
+                        <span class="help inline"><s:text name="text.create.html.6"/></span>
+                    </div>
+                </div>
+                <p data-price></p>
+
+
+                <input class="btn" type="button" data-submit value="确定">
+                <input class="btn" type="button" data-cancel value="取消">
+            </div>
+        </form>
+
+
+    </div>
+
+</script>
+
+<script type="text/template" id="delete_port_tpl">
+
+    <div data-main
+         style="z-index: 999999;position: absolute;top: 20%;left: 30%;background: #FFFFFF;border: 1px solid #999;">
+        <h1 class="sdn-h1" style="font-size:16px;">删除端口</h1>
+        <form>
+            <div style="padding:0 20px 20px 20px">
+                <input type="hidden" name="userPortId" value="<@=id@>">
+                <table class="sdn-table" style="width: 100%;height: 80%">
+                    <tr>
+                        <td>端口：</td>
+                        <td><input type="text" value="<@=name@>"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <textarea style="width:500px" name="content" placeholder="详细描述您的需求，工作人员会第一时间与您取得联系" rows="10"></textarea>
+                        </td>
+                    </tr>
+                </table>
+
+
+                <input class="btn" type="button" data-submit value="删除">
+                <input class="btn" type="button" data-cancel value="取消">
+            </div>
+        </form>
+
+
+    </div>
+
+</script>
+
+
+<script type="text/template" id="create_port_tpl">
+
+    <div data-main
+         style="z-index: 999999;position: absolute;top: 20%;left: 30%;background: #FFFFFF;border: 1px solid #999;">
+        <h1 class="sdn-h1" style="font-size:16px;">新增端口
+            <input class="fr tanchuclose" type="button" data-cancel value="x">
+        </h1>
+        <form>
+
+            <div id="an-sdn-div-table" style="padding:0 20px 20px 20px">
+
+                <div class="an-wen an-wen02">22222</div>
+                <div class="an-wen an-wen03">3333</div>
+                <table id="an-table-wenhao" class="sdn-table" style="width: 100%;height: 80%">
+                    <tr>
+                        <td>位置：</td>
+                        <td>
+                            <input name="title" type="text"/>
+                            <span class="an-imgwen01">
+                                <img class="an-imgwen" src="../../../images/an-wenhao.png" alt="">
+                                <div class="an-wen an-wen01">1111<b class="an-wenclose">×</b></div>
+                            </span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>接入类型：</td>
+                        <td>
+                            <input type="radio" name="portType" value="port" />终端接入
+                            <span class="an-imgwen02">
+                                <img class="an-imgwen" src="../../../images/an-wenhao.png" alt="">
+                                <div class="an-wen an-wen02">222 <b class="an-wenclose">×</b></div>
+                            </span>
+                            <input type="radio" name="portType" value="vlan" />中继接入
+                            <span class="an-imgwen03">
+                                <img class="an-imgwen" src="../../../images/an-wenhao.png" alt="">
+                                <div class="an-wen an-wen03">333<b class="an-wenclose">×</b></div>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>联系人：</td>
+                        <td>
+                            <input type="text" name="customerName">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>联系电话：</td>
+                        <td>
+                            <input type="text" name="customerPhoneNum">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <textarea style="width:500px" name="content" placeholder="详细描述您的需求，具体位置，工作人员会第一时间与您取得联系" rows="10"></textarea>
+                        </td>
+                    </tr>
+                </table>
+
+
+                <input class="btn" type="button" data-submit value="确定">
+                <input class="btn" type="button" data-cancel value="取消">
+            </div>
+        </form>
+
+
+    </div>
+
+</script>
+
+<script type="text/template" id="create_flow2_tpl">
+
+    <div data-main
+         style="z-index: 999999;position: absolute;top: 20%;left: 30%;background: #FFFFFF;border: 1px solid #999;">
+        <h1 class="sdn-h1" style="font-size:16px;">新增云通道</h1>
+        <form>
+            <input type="hidden" name="property" value="2" >
+            <input type="hidden" name="guaranteed" value="true" >
+            <div style="padding:0 20px 20px 20px">
+
+                <table class="sdn-table" style="width: 100%;height: 80%">
+                    <tr>
+                        <td>服务：</td>
+                        <td>Internet 服务</td>
+                    </tr>
+                    <tr>
+                        <td>云通道名称：</td>
+                        <td><input name="description" type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td>接入地址：</td>
+                        <td>
+                            <input type="text" value="<@=source@>" disabled />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>出口类型：</td>
+                        <td data-qos>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>带宽：</td>
+                        <td>
+                            <div class="fdl">
+                                <div class="panel-inner">
+                                    <div style="width: 350px;" class="slider slider-horizontal">
+                                        <div name="slider-range-bandwidth"></div>
+                                    </div>
+                                    <input class="preview mini" name="bandwidth" value="1" type="text">
+                                    <span class="help inline"><s:text name="text.create.html.6"/></span><!-- Mbps -->
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>价格：</td>
+                        <td>
+                            <span data-price></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <textarea style="width:500px" name="label" placeholder="详细描述您的需求，具体位置，工作人员会第一时间与您取得联系"
+                                      rows="10"></textarea>
+                        </td>
+                    </tr>
+                </table>
+
+
+                <input class="btn" type="button" data-submit value="确定">
+                <input class="btn" type="button" data-cancel value="取消">
+            </div>
+        </form>
+
+
+    </div>
+
+</script>
+
+
+<script type="text/template" id="create_flow1_tpl">
+
+    <div data-main
+         style="z-index: 999999;position: absolute;top: 20%;left: 30%;background: #FFFFFF;border: 1px solid #999;">
+        <h1 class="sdn-h1" style="font-size:16px;">新增云通道</h1>
+        <form>
+
+            <div style="padding:0 20px 20px 20px">
+
+                <table class="sdn-table" style="width: 100%;height: 80%">
+                    <tr>
+                        <td>服务：</td>
+                        <td>专线服务</td>
+                    </tr>
+                    <tr>
+                        <td>云通道名称：</td>
+                        <td><input name="title" type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td>A 接入地址：</td>
+                        <td>
+                            <input type="text" name="inputAddr1" value="<@=source@>" disabled />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Z 接入地址：</td>
+                        <td>
+                            <input type="text" name="inputAddr2" value="<@=target@>" disabled />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>带宽：</td>
+                        <td>
+                            <div class="fdl">
+                                <div class="panel-inner">
+                                    <div style="width: 350px;" class="slider slider-horizontal">
+                                        <div name="slider-range-bandwidth"></div>
+                                    </div>
+                                    <input class="preview mini" name="bw_input" value="1" type="text">
+                                    <span class="help inline"><s:text name="text.create.html.6"/></span><!-- Mbps -->
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <textarea style="width:500px" name="content" placeholder="详细描述您的需求，具体位置，工作人员会第一时间与您取得联系" rows="10"></textarea>
+                        </td>
+                    </tr>
+                </table>
+
+
+                <input class="btn" type="button" data-submit value="暂未提供">
+                <input class="btn" type="button" data-cancel value="取消">
+            </div>
+        </form>
+
+
+    </div>
+
+</script>
+<%--<script>--%>
+<%--function huadong(e){--%>
+<%--var www=$(e.target);--%>
+<%--console.log(www);--%>
+<%--var a=www.val()+"%";--%>
+<%--www.css({--%>
+    <%--"background-size":a+" 100%"--%>
+<%--});--%>
+<%--console.log(www.css("background-size"));--%>
+<%--}--%>
+<%--$(document).on("mousemove","#an-range input[type='range']",function(e){--%>
+<%--huadong(e);--%>
+<%--});--%>
+<%--$(document).on("click","#an-range input[type='range']",function(e){--%>
+<%--huadong(e)--%>
+<%--});--%>
+
+<%--</script>--%>
+
+
+</html>

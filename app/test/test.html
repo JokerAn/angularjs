@@ -20,4 +20,26 @@
         $scope.lists=[1,2,3,4,2];
     })
 </script>
+<script>
+
+    setInterval(function(){var a=new Date();
+        console.log(a)
+    },500);
+    //618京东
+    var num=1;
+    function sixjd(){
+        if($(".d-countdown.j-module").eq(4).children(".d-timer.d-clearfix").children(".d-seconds").html()=='00'){
+                window.location.reload();
+        }else{
+            console.log($(".d-countdown.j-module").eq(3).children(".d-timer.d-clearfix").children(".d-seconds").html());
+        }
+    }
+    var a=setInterval(function(){sixjd()},0);
+
+    $(".jGoodsInfo .jBtnArea a")[3].click();
+
+    //$(".goods-btn a")[5].click();
+
+    $("#InitCartUrl").click();
+</script>
 </html>

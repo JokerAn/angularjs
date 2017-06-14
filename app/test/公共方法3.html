@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../lib/css/bootstrap.css">
+    <script src="../lib/js/jquery.js"></script>
+    <script src="../lib/js/angular.js"></script>
+    <script src="../lib/js/angular-route.js"></script>
+
+
+</head>
+
+<body >
+<div ng-controller ="myController">
+    {{data.time}}
+
+    <BR/>
+    <button ng-click ="updateTime()">更新时间点击</button>
+    <button id ="updateTimeButton">更新时间</button>
+</div>
+
+
+<script>
+    var module = angular.module("myapp",[]);
+    var myController1 = module.controller("myController",function($scope){
+
+        $scope.data = {time:new Date()};
+
+        $scope.updateTime = function(){
+            $scope.data.time = new Date();
+        }
+
+        $("#updateTimeButton").on("click",function(){
+            console.log("更新时间点击");
+            $scope.data.time = new Date();
+            $scope.$digest();
+        });
+    });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

@@ -5,10 +5,12 @@
     <my-pop ng-show="index2Popxq" templateurl="index2/popxq.html"></my-pop>
     <my-pop ng-show="index2Popcj" templateurl="index2/popcj.html"></my-pop>
     <my-pop ng-show="index2Popfwq" templateurl="index2/popfwq.html"></my-pop>
+    <my-pop ng-show="aaas" templateurl="index2/popfwq2.html"></my-pop>
 
-    <a href="#" class="btn btn-danger" ng-click="popShow('index2Popxq','详情111')">详情</a>
-    <a href="#" class="btn btn-danger" ng-click="popShow('index2Popcj','创建')">创建</a>
-    <a href="#" class="btn btn-danger" ng-click="popShow('index2Popfwq','服务器')">服务器</a>
+    <a href="javascript:;" class="btn btn-danger" ng-click="popShow('index2Popxq','详情111')">详情</a>
+    <a href="javascript:;" class="btn btn-danger" ng-click="popShow('index2Popcj','创建')">创建</a>
+    <a href="javascript:;" class="btn btn-danger" ng-click="popShow('index2Popfwq','服务器')">服务器</a>
+    <a href="javascript:;" class="btn btn-danger" ng-click="popShow('aaas','test')">test</a>
     <hr>
 
     <div class="uploadbox">
@@ -19,9 +21,18 @@
             <span>点击上传</span>
         </div>
     </div>
+    <img src="../../images/1.png" alt=""/>
+    <img src="/images/2.png" alt="">
     <hr>
 
     <input class="datainp wicon andate" type="text"  readonly>
+    <br>
+    您的名字是:<input class="" type="text"  ng-model="userName" >
+    <p>{{userName}}</p>
+    <br>
+    <button class="btn btn-default" ng-click="setUserName(userName)">确定</button>
+    <br>
+    <input type="text" ng-model="an">
 
 
     <script type="text/javascript">//控制本页面的日期不包括弹出框

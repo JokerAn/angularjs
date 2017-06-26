@@ -2,19 +2,16 @@
     <div class="pop">
         <h3>{{poptitle}} <span class="fr" ng-click="popHide('index2Popxq')">×</span></h3>
         <div class="popContent">
-            <ul>
-                <li>index2</li>
-                <li>index2</li>
-                <li>index2</li>
-                <li>index2</li>
-                <li>index2</li>
-                <li>index2s</li>
-            </ul>
+            <p>你的名字是 <span  >{{userName}}</span></p>
+            <p>点击这里就可以清楚你的信息</p>
+            <button class="btn btn-default" ng-click="clearUserName()">清除信息</button>
+            <p>asdfafd <span>{{userName}}</span></p>
+            <input type="text" ng-model="userName">
         </div>
         <!--两端 popq-q ，左侧 popqq-left ,右侧 popqq-right -->
         <div class="popqq clear popq-q">
-            <a href="#" class="btn btn-andefault" ng-click="popHide('index2Popxq')">取消</a>
-            <a href="#" class="btn btn-andefault">确定</a>
+            <a href="javascript:;" class="btn btn-andefault" ng-click="popHide('index2Popxq')">取消</a>
+            <a href="javascript:;" class="btn btn-andefault">确定</a>
         </div>
     </div>
 

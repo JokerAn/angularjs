@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="app">
 <head>
+    <!--<base href="/test2/index.html">-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="../lib/css/bootstrap.css">
+    <link rel = "stylesheet" href = '../css/font-awesome.css' >
+
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="jedate/skin/jedate.css">
 
@@ -17,7 +27,30 @@
     <script type="text/javascript" src="jedate/jquery.jedate.js"></script>
 
     <style>
-
+        .userName{
+            position: relative;
+        }
+        .userName:hover .sign-out{
+            display: block;
+        }
+        .sign-out{
+            position: absolute;
+            top: 50px;
+            width: 150px;
+            background: #ddd;
+            right: 0;
+            display: none;
+            text-align: center;
+        }
+        .sign-out li{
+            border:1px solid #bbc;
+        }
+        .sign-out li:hover{
+            background-color: #0ff;
+        }
+        .sign-out a{
+            display: block;
+        }
 
 
     </style>
@@ -26,45 +59,35 @@
 
 <body ng-controller="allControl">
 
-    <div class="index-top clear">
-        <div class="longtel-logo"></div>
-        <div>
-            <ul>
-                <li>
+<div class="index-top clear">
+    <div class="longtel-logo"></div>
+    <div >
+        <ul>
+            <li>
 
-                    <a href="javascript:;"> <i>三</i>工单 <em>{{gongDaNum}}</em></a>
-                </li>
-                <li><a href="javascript:;">z@z.com</a></li>
-            </ul>
-        </div>
+                <a href="javascript:;"> <i>三</i>工单 <em>{{gongDaNum}}</em></a>
+            </li>
+            <li class="userName" style="position: relative;">
+                <a href="javascript:;" >z@z.com</a>
+                <ul class="sign-out" >
+                    <li>
+                        <a href="javascript:;">退出</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
-    <div id="JokerAn">
+</div>
+<div id="JokerAn">
 
-        <div class="index-left-list" ng-include="'left.html'"></div>
+    <div class="index-left-list" ng-include="'left.html'"></div>
 
-        <div id="a1" ng-view>
-
-
-
+    <div id="a1" ng-view>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </div>
     </div>
+</div>
 
 </body>
 </html>

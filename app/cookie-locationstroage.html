@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<a href="test/http-json跨域.html">http-json跨域.html</a>
+<a href="test/input-range.html">滑块</a>
+<a href="test/example.html">渐变色</a>
+<a href="test/example1.html">渐变色1</a>
+<a href="test/flex.html">flex</a>
+<a href="test/公共方法.html">公共方法</a>
+<a href="test/公共方法1.html">公共方法1</a>
+<p>
+    url:<b> ' http://www.w3school.com.cn/jsref/dom_obj_location.asp '</b>;
+    <br><br>
+    location.hash----- <b>" "</b> -----//设置或返回从井号 (#) 开始的 URL（锚）。
+    <br><br>
+    location.host-----<b>" www.w3school.com.cn "</b> -----//设置或返回主机名 <b>和</b> 当前 URL 的端口号。
+    <br><br>
+    location.hostname-----<b>" www.w3school.com.cn "</b>-----//设置或返回当前 URL 的主机名。
+    <br><br>
+    location.href-----<b>" http://www.w3school.com.cn/jsref/dom_obj_location.asp "</b>-----//设置或返回完整的 URL。
+    <br><br>
+    location.pathname-----<b>" /jsref/dom_obj_location.asp "</b> -----//设置或返回当前 URL 的路径部分。
+    <br><br>
+    location.port-----<b>" "</b>-----//设置或返回当前 URL 的端口号。
+    <br><br>
+    location.protocol-----<b>"  http: "</b>-----//设置或返回当前 URL 的协议。
+    <br><br>
+    location.search-----<b>" "</b>-----//设置或返回从问号 (?) h URL（查询部分）。
+    <br><br>
+</p>
+<script>
+/*
+//设置localStorage
+    sessionStorage.setItem("key", "value");
+    localStorage.setItem("name", "哇哈哈");
+
+//获取localStorage
+    var value = sessionStorage.getItem("key");
+    var name = localStorage.getItem("name");
+console.log(name);
+//删除
+    //sessionStorage.removeItem("key");
+    //localStorage.removeItem("name");
+
+//清除所有的
+    //sessionStorage.clear();
+    //localStorage.clear();
+//web Storage不但可以用自身的setItem,getItem等方便存取，也可以像普通对象一样用点(.)操作符，及[]的方式进行数据存储，
+// 像如下的代码：
+
+    var storage = window.localStorage;
+    storage.key1 = "hello";
+    storage["key2"] = "world";
+    console.log(storage.key1);
+    console.log(storage["key2"]);
+
+//遍历
+    var storage = window.localStorage;
+    for (var i=0, len = storage.length; i  <  len; i++){
+        var key = storage.key(i);
+        var value = storage.getItem(key);
+        console.log(key + "=" + value);
+    }
+
+//storage还提供了storage事件，当键值改变或者clear的时候，就可以触发storage事件，
+// 如下面的代码就添加了一个storage事件改变的监听：
+
+    if(window.addEventListener){
+        window.addEventListener("storage",handle_storage,false);
+    }else if(window.attachEvent){
+        window.attachEvent("onstorage",handle_storage);
+    }
+    function handle_storage(e){
+        if(!e){e=window.event;}
+    }*/
+</script>
+<script type="text/javascript">
+    //如果设置的时候没有写过期时间 默认过期时间为关闭浏览器(不是关闭当前网页!)
+    function setCookie(name, value, day) {
+        arguments[2]==undefined?day=1:day=day//设置默认为1天  注释了这一行就变为不写时间就是关闭浏览器就清除此条cookie
+        console.log(day);
+        var oldDate=new Date();
+        oldDate.setDate(oldDate.getDate()+day);
+
+        //删除cookie必须将过期日期的格式toGMTString()!!!!   encodeURIComponent最好使用他会把'=','$'等特殊符号转变
+        // 以免值中包含特殊字符程序出错 转换了就不怕了 u expires 是过期时间的key
+        document.cookie=name+'='+encodeURIComponent(value)+';expires='+oldDate.toGMTString();
+    }
+
+    function getCookie(name) {
+        var arr=document.cookie.split('; ');
+        for( var i=0;i<arr.length;i++) {
+            var arr2=arr[i].split('=');
+            if(arr2[0]==name) {
+                var getC = decodeURIComponent(arr2[1]);
+                return getC;
+            }
+        }
+
+        return '';
+    }
+
+    function removeCookie(name) {
+        setCookie(name, '1', -1);
+    }
+
+
+
+
+    //cookie的格式是
+//    var cookies="BAIDUID=2DA8E72EA07BC39405B464BA51214267:FG=1; PSTM=1496642758; BIDUPSID=61E7F37857D8109297D916BC1D7B014A; FP_UID=617c4e5d7deef45c82bb3c58381070d0; IK_CID_95=1; IK_CID_80=1; BDSFRCVID=kyPsJeCCxG3rQ5nZhnPp_KLgEomzvLxREDct3J; "
+//    var objcookies=cookies.split('; ');
+//    console.log(objcookies);
+
+
+
+    function a(a,b) {
+        arguments[1]==undefined?1:b
+        console.log(b);
+    }
+    a(20);
+
+
+
+</script>
+</body>
+</html>

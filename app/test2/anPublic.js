@@ -1,14 +1,13 @@
 
 var app=angular.module("app",['ngRoute']);
-app.config(function($httpProvider,$routeProvider) {
+app.config(function($httpProvider,$routeProvider,$locationProvider) {
     $httpProvider.defaults.headers.common["Authorization"] ="Basic " + btoa("cloudAdmin:123123:z@z.com");//beforeSend 验证头部
 
     $routeProvider
-        .when("/index", {
+        .when("/index1", {
             templateUrl: "index2/index-2.html",
             controller: "indexControl"
         })
-
         .when("/test1", {
             templateUrl: "test1/test1.html",
             controller: "test1Control"
@@ -17,19 +16,92 @@ app.config(function($httpProvider,$routeProvider) {
             templateUrl: "test2/test2.html",
             controller: "test2Control"
         })
-        .otherwise({redirectTo: '/index'});
+        .when("/test3", {
+            templateUrl: "test3/test2.html",
+            controller: "test2Control"
+        })
+        .when("/test4", {
+            templateUrl: "test4/test2.html",
+            controller: "test2Control"
+        })
+        .when("/test5", {
+            templateUrl: "test5/test2.html",
+            controller: "test2Control"
+        })
+        .when("/test6", {
+            templateUrl: "test6/test2.html",
+            controller: "test2Control"
+        })
+        .otherwise({redirectTo: '/index1'});
+    // $locationProvider.html5Mode(true);
 });
+function leftBlue(url){
+        angular.forEach($('.left-list>ul li a'),function(data){
+            console.log(url);
+            if($(data).attr('ng-click')!==undefined){
+                if($(data).attr('ng-click').search(url)!==-1){
+                    $('.left-list>ul li a').parent('li').removeClass('rgb428bca');//all remove bulecolor
+                    $('.left-list>ul li a').siblings('ul').stop(true,false).slideUp(300);//all slideUp
+                    $(data).parent('li').parent('ul').stop(true,false).slideDown(300);//isClicked this parent('ul') slideDown
+                    // (don't careabout this has children('ul') or nothas ,all is OK! becaouse here is slideDown not slideUp!
+                    $(data).parent('li').addClass('rgb428bca');//make it parent('li') blue;
 
+                }else{
+                    console.log(1);
+                }
+            }
+        });
+    }
+function onloadleftBlue(){
+    var locationhash=location.hash;
+        angular.forEach($('.left-list>ul li a'),function(data){
+            console.log(url);
+            if($(data).attr('ng-click')!==undefined){
+                if($(data).attr('ng-click').search(url)!==-1){
+                    $('.left-list>ul li a').parent('li').removeClass('rgb428bca');//all remove bulecolor
+                    $('.left-list>ul li a').siblings('ul').stop(true,false).slideUp(300);//all slideUp
+                    $(data).parent('li').parent('ul').stop(true,false).slideDown(300);//isClicked this parent('ul') slideDown
+                    // (don't careabout this has children('ul') or nothas ,all is OK! becaouse here is slideDown not slideUp!
+                    $(data).parent('li').addClass('rgb428bca');//make it parent('li') blue;
 
+                }else{
+                    console.log(1);
+                }
+            }
+        });
+    }
 app.controller("allControl",function($rootScope,$scope,$http,$location){
+    // $scope.ngClick='/index';
     $rootScope.gotoPage = function (url) {
-
         $location.path(url);
         $('body').scrollTop(0);
+        $scope.ngClick=url;
+        leftBlue(url);
+        // $scope.newDate=new Date().getTime();
+        // for(var i=0,len=$('img').length;i<len;i++){
+        //     $('img').eq(i).attr('src',$('img')[i].src.split('?')[0]+"?time="+$scope.newDate);
+        //     console.log($('img')[i].src);
+        // }
     };
+    // function leftBlue(){
+    //     angular.forEach($('.left-list>ul li a'),function(data){
+    //         // console.log($scope.ngClick);
+    //         if($(data).attr('ng-click')!==undefined){
+    //             if($(data).attr('ng-click').search($scope.ngClick)!==-1){
+    //                 $('.left-list>ul li a').parent('li').removeClass('rgb428bca');//all remove bulecolor
+    //                 $('.left-list>ul li a').siblings('ul').stop(true,false).slideUp(300);//all slideUp
+    //                 $(data).parent('li').parent('ul').stop(true,false).slideDown(300);//isClicked this parent('ul') slideDown
+    //                 // (don't careabout this has children('ul') or nothas ,all is OK! becaouse here is slideDown not slideUp!
+    //                 $(data).parent('li').addClass('rgb428bca');//make it parent('li') blue;
+    //             }else{
+    //                 console.log(1);
+    //             }
+    //         }
+    //     });
+    // }
+
+
     $rootScope.gongDaNum=5;//工单数
-
-
 
     $scope.$on("get-ajax",function (e,data) {
         $http.get(data.url).then(
@@ -43,6 +115,7 @@ app.controller("allControl",function($rootScope,$scope,$http,$location){
             }
         )
     });
+
     $scope.$on("post-ajax",function (e,data) {
         $http({
             method:'POST',
@@ -59,12 +132,13 @@ app.controller("allControl",function($rootScope,$scope,$http,$location){
     });
 
     $scope.popHide=function (hide) {
-        $rootScope[hide]=false;
+        $scope[hide]=false;
     };
+
     $scope.popShow=function (show,title) {
-        $rootScope[show]=true;
+        $scope[show]=true;
         $scope.poptitle=title;
-    }
+    };
     $(" body .b1").jeDate({
         skinCell:"jedateblue",                      //日期风格样式，默认蓝色
         format:"YYYY-MM-DD hh:mm:ss",               //日期格式
@@ -194,4 +268,52 @@ app.directive("myPop",function () {
         }
     }
 });
+
+// (function urlAddDate(){
+//     var newDate=new Date().getTime();
+//     var links=$('link');
+//     var scripts=$('script');
+//     for(var i=0,Len=links.length;i<Len;i++){
+//         var oldUrl=links[i].href.slice(0,-4);
+//         links[i].href=oldUrl+".css"+'?time='+newDate;
+//         console.log(links[i].href);
+//     }
+//     for(var i=0,Len=scripts.length;i<Len;i++){
+//         var oldUrl=scripts[i].src.slice(0,-3);
+//         scripts[i].src=oldUrl+".js"+'?time='+newDate;
+//         console.log(scripts[i].src);
+//     }
+//
+// })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

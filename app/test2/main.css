@@ -39,8 +39,32 @@ a {
 
 
 
+/* 颜色大全 start*/
 
 
+.left-list .rgb2b2b38{
+    background: #2B2B38;
+}
+.left-list .rgb428bca{
+    background: #428BCA
+;
+}
+
+
+/* 颜色大全 end*/
+
+
+/* 图标字体 end*/
+
+body .fa{
+    /*border: 1px solid #ddd;*/
+    display: inline-block;
+    font-family: FontAwesome;
+    font-size:14px;
+
+}
+
+/* 图标字体 end*/
 
 .index-top{
     z-index:9999999;
@@ -95,19 +119,77 @@ a {
 }
 .index-left-list{
     width:200px;
-    padding:10px;
+    padding:10px 0;
     float: left;
     background: #333744;
     position: fixed;
     height: 100%;
 
 }
-.left-list>ul>li>a{
+.left-list>ul>li a{
     display: block;
-    padding:3px 6px;
+    padding:9px 17px;
     cursor: pointer;
     color: #fff;
+    font-size: 12px;
 }
+.left-list>ul li .fa {
+    font-size: 13px;
+    margin: 0 5px 0 0;
+    position: relative;
+    top: 2px;
+    width: 17px;
+    height: 15px;
+    /*border: 1px solid #ddd;*/
+    overflow: hidden;
+    text-align: center;
+}
+.left-list>ul li .fa {
+    font-size: 13px;
+    margin: 0 10px 0 0;
+    position: relative;
+    top: 2px;
+    width: 17px;
+    height: 15px;
+    /*border: 1px solid #ddd;*/
+    overflow: hidden;
+    text-align: center;
+}
+.left-list>ul li .fa-angle-down {
+    float: right;
+    transition:All 0.4s ease-in-out;
+}
+.left-list>ul li ul {
+    display: none;
+}
+.left-list>ul ul li>a:hover{
+    background: #556677;
+}
+.left-list>ul ul li>a:hover i.leftDian{
+    background: #428BCA;
+}
+.left-list>ul ul li>a .leftDian {
+
+    display: inline-block;
+    width: 5px;
+    height: 4px;
+    background: #fff;
+    margin: 0 11px;
+    position: relative;
+    top: -2px;
+    left: -4px;
+}
+.left-list>ul>li>a>.jiantou{
+
+    transform:rotate(180deg);
+    -webkit-transform:rotate(180deg);
+    -moz-transform:rotate(180deg);
+    -o-transform:rotate(180deg);
+    -ms-transform:rotate(180deg);
+    transition:All 0.2s ease-in-out;
+
+}
+
 #a1{
     padding:3px 6px;
     cursor: pointer;

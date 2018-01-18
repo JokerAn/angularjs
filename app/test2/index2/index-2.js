@@ -19,8 +19,8 @@ app.controller("indexControl",function($scope,$rootScope,$location){
         // $scope.poptitle='asdfa';
 
     });
-    $scope.companys=['龙腾佳讯','脉展','佳美','百度'];
-    $scope.company='龙腾佳讯';
+    $scope.companys=['公司１','脉展','佳美','百度'];
+    $scope.company='公司１';
     $scope.userName="请登录";
     $scope.setUserName=function(name){
         $scope.localStorageLength=localStorage.length+1;

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/js/jquery.js"></script>
+</head>
+<body ng-controller="allControl">
+</body>
+<script>
+    ///////////////////////////promise//////////////////
+    var p = new Promise(function(resolve, reject){
+        //做一些异步操作
+        setTimeout(function(){
+            console.log('执行完成');
+            resolve('随便什么数据');
+        }, 2000);
+    });
+    function ajax(url, data, callback) {
+        var p = new Promise(function (resolve, reject) {
+            $.ajax({
+                url: url,
+                type: data == null ? 'GET' : 'POST',
+                dataType: "json",
+                data: data == null ? '' : JSON.stringify(data),
+                async: true,
+                contentType: "application/json",
+                success: function (resp) {
+                    callback(resp);
+                    resolve();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    if (XMLHttpRequest.status == "401") {
+                        window.parent.location = '/enterprise/enterprise_login.html';
+                        self.location = '/enterprise/enterprise_login.html';
+                    } else {
+                        alert(XMLHttpRequest.responseText);
+                    }
+                    reject();
+                }
+            });
+        });
+        return p;
+    }
+    ajax('/prefix/entity1/action1',null, function(resp){
+        //do something on response
+        someData.attr1 = resp.attr1;
+    })
+        .then(
+        ajax('/prefix/entity2/action2', someData, function(resp){
+                //do something on response
+            }
+        )
+        .catch(function(res){
+
+        }))
+</script>
+</html>

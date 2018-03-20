@@ -26,33 +26,35 @@
 //会在页面动态创建一个script  一直在页面显示
 
     var url="http://suggest.taobao.com/sug?code=utf-8&q=iphone&callback=test";
-    var urlbaidu="https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=as&cb=test";
+    var urlbaidu="https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=as&cb=test12";
                         //这是搜索"as"  cb就是callback 但是百度这个API只能写cb不能写callback
-    var resdata;
-    function kuayu(url){
+
+    function kuayu(res){
         var ele=document.createElement("script");
         ele.type="text/javascript";
-        ele.src=url;
+        ele.src=res;
         document.getElementsByTagName("head")[0].appendChild(ele)
     }
     kuayu(urlbaidu);
 
-    function test(res){//test就是callback返回的自定义函数可是说随便一个名字
+    function test12(res){//test就是callback返回的自定义函数可是说随便一个名字
         console.log(res);
+        console.log('jsonp 动态添加script标签实现跨域名');
     }
 
 ///------ajax跨域------////
 //会在先页面动态创建一个script然后接受到数据后立马删除 最终不会在页面显示
-
+var resdata;//用来接收数据
     $.ajax({
         type:"get",
-        url:"https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=as",
+        // url:"https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=as",//百度接口
+        url:"http://suggest.taobao.com/sug?code=utf-8&q=iphone",
         dataType:'jsonp',
-//        jsonp:"callback",//用淘宝接口的时候用callback
-        jsonp:"cb",//用百度接口的时候用cb  可能是百度设置的 常规的都是callback
+       jsonp:"callback",//用淘宝接口的时候用callback
+        // jsonp:"cb",//用百度接口的时候用cb  可能是百度设置的 常规的都是callback
         success:function(data){
-            console.log(data)
-            resdata=data
+            resdata=data;
+            console.log(resdata);
         },
         error:function(data){
             console.log("error")

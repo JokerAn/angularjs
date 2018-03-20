@@ -4,127 +4,602 @@
 	<title>Solid Color demo</title>
 	<script type="text/javascript" src="../lib/js/jquery.js"></script>
 </head>
-<style>/**/
-	.first-face {  display: flex; justify-content: center/*水平居中*/; align-items: center/*垂直居中设置的是这个容器*/;  }
-	.second-face {  display: flex; justify-content: space-between;  }
-	.second-face .pip:nth-child(2) {  align-self: flex-end;  }
-	.third-face {  display: flex; justify-content: space-between;  }
-	.third-face .pip:nth-of-type(2) { align-self: center/*垂直居中设置的是容器内的这个元素*/; }
-	.third-face .pip:nth-of-type(3) { align-self: flex-end; }
-	.fourth-face, .sixth-face { display: flex; justify-content: space-between; }
-	.fourth-face .column, .sixth-face .column {
-		display: flex; flex-direction: column; justify-content: space-between; }
-	.fifth-face { display: flex; justify-content: space-between; }
-	.fifth-face .column {
-		display: flex; flex-direction: column;  justify-content: space-between; }
-	.fifth-face .column:nth-of-type(2) { justify-content: center; }
-	* { box-sizing: border-box; }
-	html, body { height: 100%; }
-	/*body {*/
-		/*display: flex; align-items: center; justify-content: center; vertical-align: center; flex-wrap: wrap;*/
-		/*align-content: center; font-family: 'Open Sans', sans-serif;  background: linear-gradient(top, #222, #333);*/
-	/*}*/
-	[class$="face"] {
-		margin: 16px; padding: 4px; background-color: #e7e7e7;
-		width: 104px; height: 104px; object-fit: contain;border-radius: 10%;
-		box-shadow:
-				inset 0 5px white,
-				inset 0 -5px #bbb,
-				inset 5px 0 #d7d7d7,
-				inset -5px 0 #d7d7d7;
-	}
-	.pip {
-		display: block; width: 24px; height: 24px; border-radius: 50%;
-		margin: 4px; background-color: #333; box-shadow: inset 0 3px #111, inset 0 -3px #555; }
+<style>
+	*{margin:0;padding:0;}
+	body{padding:20px;}
 </style>
 	
 <body>
-<div class="first-face">
-	<span class="pip"></span>
-</div>
-
-<div class="second-face">
-	<span class="pip"></span>
-	<span class="pip"></span>
-</div>
-<div class="third-face">
-	<span class="pip"></span>
-	<span class="pip"></span>
-	<span class="pip"></span>
-</div>
-<div class="fourth-face">
-	<div class="column">
-		<span class="pip"></span>
-		<span class="pip"></span>
-	</div>
-	<div class="column">
-		<span class="pip"></span>
-		<span class="pip"></span>
-	</div>
-</div>
-<div class="fifth-face">
-	<div class="column">
-		<span class="pip"></span>
-		<span class="pip"></span>
-	</div>
-	<div class="column">
-		<span class="pip"></span>
-	</div>
-	<div class="column">
-		<span class="pip"></span>
-		<span class="pip"></span>
-	</div>
-</div>
-<div class="sixth-face">
-	<div class="column">
-		<span class="pip"></span>
-		<span class="pip"></span>
-		<span class="pip"></span>
-	</div>
-	<div class="column">
-		<span class="pip"></span>
-		<span class="pip"></span>
-		<span class="pip"></span>
-	</div>
-</div>
-<br>
 <style>
-	.aa1{
-		border:1px solid #Ddd;
-		display: flex;
-		flex:1;/*等分   flex:0 是默认 不等分*/
-		justify-content: center;
+	.box1{display: flex;border:1px solid blue;font-size: 22px;
+		color: #000;font-weight: 700}
+	.box1 li{
+		width: 100px;height: 100px;border: 2px solid red;list-style: none;
 	}
+	#box1{flex-direction: row;}
+	#box2{flex-direction: row-reverse;}
+	#box3{flex-direction: column;}
+	#box4{flex-direction: column-reverse;}
 </style>
-<div id="an" style="display: flex;border:1px solid #444;width:300px;height:200px">
-	<div class="aa1"><span style="align-self: center">1111111111</span></div>
-	<div class="aa1">2222222</div>
-	<div class="aa1">333</div>
-</div>
-<style>
-	#an111{display: flex;border:1px solid #444;width:300px;height:200px}
-	.aa2{align-self: center;flex:1/*他不用display:flex 写了更好把可能*/}
-</style>
-<div id="an111" >
-	<div class="aa2">1111111111</div>
-	<div class="aa2">2222222</div>
-	<div class="aa2 aaaaa">333</div>
-</div>
+<br><hr><br>
+<!--**********************************flex-direction属性************************-->
+<pre>
+        flex-direction属性
+        flex-direction属性决定主轴的方向（即项目的排列方向）。
+        .box {
+          flex-direction: row | row-reverse | column | column-reverse;
+        }
+        row（默认值）：主轴为水平方向，起点在左端。(跟左对齐　一样)
+        row-reverse：主轴为水平方向，起点在右端。(跟右对齐　不　一样！)
+        column：主轴为垂直方向，起点在上沿。
+        column-reverse：主轴为垂直方向，起点在下沿。
+        </pre>
 
-<div id="aaa" style="width:400px;height:400px;border:1px solid #ddd;display: flex">
-	<div class="aaa aaa0">sdfasd</div>
-	<span class="aaa aaa1">sdfasd</span>
-	<span class="aaa aaa2">sdfasd</span>
-	<!-- 因为父元素设置了flex所以span也就出现了display:block;height：100%的类似状态
-	 				这时$(".aaa1").css("display")=="block"   去掉父元素的flex span的display就是inline-->
-	<div class="aaa3">sdfasd</div>
-</div>
+
+<h1>flex-direction: column</h1>
+<ul id="box3" class="box1">
+	<li>A</li>
+	<li>B</li>
+	<li>C</li>
+</ul>
+
+<h1>flex-direction: column-reverse</h1>
+<ul id="box4" class="box1">
+	<li>A</li>
+	<li>B</li>
+	<li>C</li>
+</ul>
+<h1>flex-direction: row;</h1>
+<ul id="box1" class="box1">
+	<li>A</li>
+	<li>B</li>
+	<li>C</li>
+</ul>
+<h1>flex-direction: row-reverse;看Ａ的位置</h1>
+<ul id="box2" class="box1">
+	<li>A</li>
+	<li>B</li>
+	<li>C</li>
+</ul>
+
+<br><hr><br>
+<!--**********************************justify-content属性************************-->
+<pre>
+      	justify-content属性
+		justify-content属性定义了项目在主轴上的对齐方式。
+		.box {
+		  justify-content: flex-start | flex-end | center | space-between | space-around;
+		}
+		flex-start（默认值）：左对齐
+		flex-end：右对齐
+		center： 居中
+		space-between：两端对齐，项目之间的间隔都相等。
+		space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。
+</pre>
+<h1>justify-content: flex-start;</h1>
+<style>
+	#box0001{justify-content: flex-start;}
+</style>
+<ul id="box0001" class="box1">
+	<li>A</li>
+	<li>B</li>
+	<li>C</li>
+</ul>
+
+<h1>justify-content: flex-end;;看Ａ的位置</h1>
+<style>
+	#box0002{justify-content: flex-end;}
+</style>
+<ul id="box0002" class="box1">
+	<li>A</li>
+	<li>B</li>
+	<li>C</li>
+</ul>
+
+<h1>justify-content: center;</h1>
+<style>
+	#box0003{justify-content: center;}
+</style>
+<ul id="box0003" class="box1">
+	<li>A</li>
+	<li>B</li>
+	<li>C</li>
+</ul>
+
+<h1>justify-content: space-between;</h1>
+<style>
+	#box0004{justify-content: space-between;}
+</style>
+<ul id="box0004" class="box1">
+	<li>A</li>
+	<li>B</li>
+	<li>C</li>
+	<li>D</li>
+</ul>
+
+<h1>justify-content: space-around;</h1>
+<style>
+	#box0005{justify-content: space-around;}
+</style>
+<ul id="box0005" class="box1">
+	<li>A</li>
+	<li>B</li>
+	<li>C</li>
+	<li>D</li>
+</ul>
+
+<br><hr><br>
+<!--**********************************flex-wrap属性************************-->
+
+<pre>
+      	flex-wrap属性
+		默认情况下，项目都排在一条线（又称"轴线"）上。flex-wrap属性定义，如果一条轴线排不下，如何换行。
+        .box{
+  			flex-wrap: nowrap | wrap | wrap-reverse;
+		}
+        nowrap（默认）：不换行。自动压缩但不放大
+        wrap：换行，第一行成不下的在＇下＇一行开头重新排列。
+        wrap-reverse：换行，第一行成不下的在＇上＇一行开头重新排列。
+</pre>
+
+<h1>flex-wrap: nowrap</h1>
+<style>
+	#box01{flex-wrap: nowrap}
+</style>
+<ul id="box01" class="box1">
+	<li>A</li>
+	<li>B</li>
+	<li>C</li>
+	<li>D</li>
+	<li>E</li>
+	<li>F</li>
+</ul>
+
+<h1>flex-wrap: wrap</h1>
+<style>
+	#box02{flex-wrap: wrap}
+</style>
+<ul id="box02" class="box1">
+	<li>A</li>
+	<li>B</li>
+	<li>C</li>
+	<li>D</li>
+	<li>E</li>
+	<li>F</li>
+</ul>
+
+<h1>flex-wrap: wrap-reverse</h1>
+<style>
+	#box03{flex-wrap: wrap-reverse}
+</style>
+<ul id="box03" class="box1">
+	<li>A</li>
+	<li>B</li>
+	<li>C</li>
+	<li>D</li>
+	<li>E</li>
+	<li>F</li>
+</ul>
+<br><hr><br>
+<!--**********************************flex-flow************************-->
+
+<pre>
+      	flex-flow属性
+		flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。
+		.box {
+  			flex-flow: flex-direction 空格 flex-wrap;
+		}
+        flex-start（默认值）：左对齐
+		flex-end：右对齐
+		center： 居中
+		space-between：两端对齐，项目之间的间隔都相等。
+		space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。
+</pre>
+
+<h1>flex-flow: column 空格 wrap-reverse;</h1>
+<style>
+	#box001{flex-flow: row-reverse wrap-reverse;}
+</style>
+<ul id="box001" class="box1">
+	<li>A</li>
+	<li>B</li>
+	<li>C</li>
+	<li>D</li>
+	<li>E</li>
+	<li>F</li>
+</ul>
+<br><hr><br>
+
+<!--**********************************align-items************************-->
+
+<pre>
+      	align-items属性
+		align-items属性定义项目在交叉轴上如何对齐。
+		.box {
+  			align-items: flex-start | flex-end | center | baseline | stretch;
+		}
+		flex-start：交叉轴的起点对齐。
+		flex-end：交叉轴的终点对齐。
+		center：交叉轴的中点对齐。
+		baseline: 项目的第一行文字的基线对齐。
+		stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。
+</pre>
+
+<h1>align-items: flex-start;</h1>
+<style>
+	#box11{align-items: flex-start;}
+</style>
+<ul id="box11" class="box1">
+	<li><p style="font-size:26px;">A爱</p></li>
+	<li style="font-size:22px;"><p>B爱上</p></li>
+	<li style="font-size:18px;"><p>C爱</p></li>
+	<li style="font-size:16px;"><p>D爱上地放安抚发</p></li>
+	<li style="font-size:12px;"><p>E爱</p></li>
+	<li><p>F爱</p></li>
+</ul>
+
+<h1>align-items: flex-end;</h1>
+<style>
+	#box12{align-items: flex-end;}
+</style>
+<ul id="box12" class="box1">
+	<li><p style="font-size:26px;">A爱</p></li>
+	<li style="font-size:22px;"><p>B爱上</p></li>
+	<li style="font-size:18px;"><p>C爱</p></li>
+	<li style="font-size:16px;"><p>D爱上地放安抚发</p></li>
+	<li style="font-size:12px;"><p>E爱</p></li>
+	<li><p>F爱</p></li>
+</ul>
+
+<h1>align-items: center;</h1>
+<style>
+	#box13{align-items: center;}
+</style>
+<ul id="box13" class="box1">
+	<li><p style="font-size:26px;">A爱</p></li>
+	<li style="font-size:22px;"><p>B爱上</p></li>
+	<li style="font-size:18px;"><p>C爱</p></li>
+	<li style="font-size:16px;"><p>D爱上地放安抚发</p></li>
+	<li style="font-size:12px;"><p>E爱</p></li>
+	<li><p>F爱</p></li>
+</ul>
+
+<h1>align-items: baseline;</h1>
+<style>
+	#box14{align-items:baseline;}
+	#box14 p {border:1px solid;}
+</style>
+<ul id="box14" class="box1">
+	<li><p style="font-size:26px;">A爱</p></li>
+	<li style="font-size:22px;"><p>B爱上</p></li>
+	<li style="font-size:18px;"><p>C爱</p></li>
+	<li style="font-size:16px;"><p>D爱上地放安抚发</p></li>
+	<li style="font-size:12px;"><p>E爱</p></li>
+	<li><p>F爱</p></li>
+</ul>
+<br><hr><br>
+
+<!--**********************************align-content************************-->
+
+<pre>
+      	align-content属性
+		align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。
+		.box {
+  			align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+		}
+		flex-start：与交叉轴的起点对齐。
+		flex-end：与交叉轴的终点对齐。
+		center：与交叉轴的中点对齐。
+		space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。
+		space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。
+		stretch（默认值）：轴线占满整个交叉轴。
+</pre>
+
+<h1>align-items: flex-start;</h1>
+<style>
+	#box11{align-content: flex-start;}
+</style>
+<ul id="box111" class="box1">
+	<li><p style="font-size:26px;">A爱</p></li>
+	<li style="font-size:22px;"><p>B爱上</p></li>
+	<li style="font-size:18px;"><p>C爱</p></li>
+	<li>D</li>
+	<li>E</li>
+	<li>F</li>
+</ul>
+
+
+<h1>align-items: flex-end;</h1>
+<style>
+	#box12{align-content: flex-end;}
+</style>
+<ul id="box112" class="box1">
+	<li>
+		<span style="font-size:26px;">A爱</span>
+		<span style="font-size:26px;">A爱</span>
+	</li>
+	<li style="font-size:22px;">
+		<span>B爱上</span>
+		<span>B爱上</span>
+		<span>B爱上</span>
+	</li>
+	<li style="font-size:12px;">
+		<span>C爱</span>
+		<span>C爱</span>
+	</li>
+	<li>D</li>
+	<li>E</li>
+	<li>F</li>
+</ul>
+
+<h1>align-items: center;</h1>
+<style>
+	#box13{align-content: center;}
+</style>
+<ul id="box113" class="box1">
+	<li>
+		<span style="font-size:26px;">A爱</span>
+		<span style="font-size:26px;">A爱</span>
+	</li>
+	<li style="font-size:22px;">
+		<span>B爱上</span>
+		<span>B爱上</span>
+		<span>B爱上</span>
+	</li>
+	<li style="font-size:12px;">
+		<span>C爱</span>
+		<span>C爱</span>
+	</li>
+	<li>D</li>
+	<li>E</li>
+	<li>F</li>
+</ul>
+
+<h1>align-items: space-between;</h1>
+<style>
+	#box114{align-content: space-between;}
+</style>
+<ul id="box114" class="box1">
+	<li>
+		<span style="font-size:26px;">A爱</span>
+		<span style="font-size:26px;">A爱</span>
+	</li>
+	<li style="font-size:22px;">
+		<span>B爱上</span>
+		<span>B爱上</span>
+		<span>B爱上</span>
+	</li>
+	<li style="font-size:12px;">
+		<span>C爱</span>
+		<span>C爱</span>
+	</li>
+	<li>D</li>
+	<li>E</li>
+	<li>F</li>
+</ul>
+
+<h1>align-items: space-around;</h1>
+<style>
+	#box115{align-content: space-around;}
+</style>
+<ul id="box115" class="box1">
+	<li>
+		<span style="font-size:26px;">A爱</span>
+		<span style="font-size:26px;">A爱</span>
+	</li>
+	<li style="font-size:22px;">
+		<span>B爱上</span>
+		<span>B爱上</span>
+		<span>B爱上</span>
+	</li>
+	<li style="font-size:12px;">
+		<span>C爱</span>
+		<span>C爱</span>
+	</li>
+	<li>D</li>
+	<li>E</li>
+	<li>F</li>
+</ul>
+
+<h1>align-items: stretch;</h1>
+<style>
+	#box116{align-content: stretch;}
+</style>
+<ul id="box116" class="box1">
+	<li>
+		<span style="font-size:26px;">A爱</span>
+		<span style="font-size:26px;">A爱</span>
+	</li>
+	<li style="font-size:22px;">
+		<span>B爱上</span>
+		<span>B爱上</span>
+		<span>B爱上</span>
+	</li>
+	<li style="font-size:12px;">
+		<span>C爱</span>
+		<span>C爱</span>
+	</li>
+	<li>D</li>
+	<li>E</li>
+	<li>F</li>
+</ul>
+
+<br><hr><br>
+
+<!--**********************************子元素属性： order属性************************-->
+
+
+<h1>order: 整数;order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。</h1>
+<style>
+	#box211 .baa1{order:30;}/*这个是 baa1 本来应该在第一个显示*/
+	#box211 .baa2{order:5;}/*这个是 baa２　本来应该在第二个显示*/
+	#box211 li:nth-child(3){order:2;}/*这个是 aa２　本来应该在第二个显示*/
+</style>
+<ul id="box211" class="box1">
+	<li class="baa1">A</li>
+	<li class="baa2" style="font-size:22px;">B</li>
+	<li style="font-size:12px;">C</li>
+	<li>D</li>
+	<li>E</li>
+	<li>F</li>
+</ul>
+
+<br><hr><br>
+
+<!--**********************************子元素属性： flex-grow属性************************-->
+
+
+<h1>flex-grow:数字，属性定义项目的"放大比"例，默认为0，即如果存在剩余空间，也不放大(=0时候)。</h1>
+<h1>将剩余所有的空间进行等比分（如果缩小的话那就　等到都缩为原始尺寸在与其他元素一起正常缩小）</h1>
+<style>
+	#box221 .bba1{flex-grow:1;}
+	#box221 .bba2{flex-grow:3;}
+	#box221 li:nth-child(3){flex-grow:6;}
+</style>
+<ul id="box221" class="box1">
+	<li class="bba1">A</li>
+	<li class="bba2" style="font-size:22px;">B</li>
+	<li style="font-size:12px;">C</li>
+	<li>D</li>
+	<li>E</li>
+	<li>F</li>
+</ul>
+
+<br><hr><br>
+<!--**********************************子元素属性： flex-shrink属性************************-->
+
+
+<h1>flex-shrink:数字 属性定义了项目的"缩小"比例，默认为1，即如果空间不足，该项目将缩小。负值对该属性无效。</h1>
+<style>
+	#box231 .q3bba1{flex-shrink:1;}
+	#box231 .q3bba2{flex-shrink:3;}
+	#box231 li:nth-child(3){flex-shrink:6;}
+</style>
+<ul id="box231" class="box1">
+	<li class="q3bba1">A</li>
+	<li class="q3bba2" style="font-size:22px;">B</li>
+	<li style="font-size:12px;">C</li>
+	<li>D</li>
+	<li>E</li>
+	<li>F</li>
+</ul>
+
+<br><hr><br>
+<!--**********************************子元素属性： flex-basis属性************************-->
+
+
+<h1>flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。</h1>
+<style>
+	#box331 .fbba1{flex-basis:300px;}
+	#box331 .fbba2{flex-basis:200px;}
+	#box331 li:nth-child(3){flex-basis:150px;}
+</style>
+<ul id="box331" class="box1">
+	<li class="fbba1">A</li>
+	<li class="fbba2" style="font-size:22px;">B</li>
+	<li style="font-size:12px;">C</li>
+	<li>D</li>
+	<li>E</li>
+	<li>F</li>
+</ul>
+
+<br><hr><br>
+<!--**********************************子元素属性： flex属性************************-->
+
+
+<h1>flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。</h1>
+<h1>该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。</h1>
+<h1>建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。</h1>
+<style>
+	#b1x331 .fbba1{flex:none;}
+	#b1x331 .fbba2{flex:100px;}
+	#b1x331 li:nth-child(3){flex-basis:150px;}
+</style>
+<ul id="b1x331" class="box1">
+	<li class="fbba1">A</li>
+	<li class="fbba2" style="font-size:22px;">B</li>
+	<li style="font-size:12px;">C</li>
+	<li>D</li>
+	<li>E</li>
+	<li>F</li>
+</ul>
+
+<br><hr><br>
+<!--**********************************子元素属性： align-self属性************************-->
+
+
+<h1>align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。</h1>
+<h1>默认值为auto，表示继承父元素的align-items属性，</h1>
+<h1>如果没有父元素，则等同于stretch。</h1>
+<h1>.item {
+	align-self: auto | flex-start | flex-end | center | baseline | stretch;
+	}</h1>
+<h1>该属性可能取6个值，除了auto，其他都与align-items属性完全一致。</h1>
+<!--<style>-->
+	<!--#b1x332 .fbba1{align-self:auto}/*这个是 baa1 本来应该在第一个显示*/-->
+<!--</style>-->
+<!--<ul id="b1x332" class="box1">-->
+	<!--<li class="fbba1">A</li>-->
+	<!--<li class="fbba2" style="font-size:22px;">B</li>-->
+	<!--<li style="font-size:12px;">C</li>-->
+	<!--<li>D</li>-->
+	<!--<li>E</li>-->
+	<!--<li>F</li>-->
+<!--</ul>-->
+
+<br><hr><br>
+
+
 
 <h2>父元素设置成flex子元素 子元素就会变为display:block;以及出现height：100%这样类似的状态（console.log(height)....不等于100%仅仅是效果一样）;;如果子元素在设置为align-self:center，子元素仍会会出现display：block但是不会出现height:100%的效果了</h2>
-adsfadfbr <br>
-asfdasdf
-
 <br>
+<style>
+	.f45{display: flex;border:1px solid red;
+		width: 800px;height: 100px;}
+	.f45 span{border: 1px solid;width: 100px;}
+</style>
+<div class="f45">
+	<span>1</span>
+	<span>2</span>
+	<span style="align-self:center">3</span>
+</div>
+<script>
+	console.log($('.f45 span:first-child').css('display'));//block
+	console.log($('.f45 span:last-child').css('display'));//block
+	console.log($('.f45 span:first-child').css('height'));//98px
+	console.log($('.f45 span:last-child').css('height'));//18px;
+</script>
+<br><hr><br>
+<h1>面试常见布局</h1>
+<style>
+	.f1{border:1px solid #ddd;height: 300px}
+	.f11{width: 100px;}
+	.f22{width: 100%;}
+	.f33{width: 300px;}
+	.ff{display: flex;}
+</style>
+<div class="ff">
+	<div class="f1 f11">100px</div>
+	<div class="f1 f22">
+		自适应
+	</div>
+	<div class="f1 f33">300px</div>
+</div>
+<hr>
+<h1>一个div三等分</h1>
+<style>
+	.div3{border:1px solid #ddd;height: 300px;display: flex;}
+	.div3 div{flex-grow: 1}
+</style>
+<div class="div3" >
+	<div></div>
+	<div class="div3"></div>
+	<div class="div3"></div>
+
+</div>
+
+
+
 <script>
 
 

@@ -597,6 +597,82 @@
 	<div class="div3"></div>
 
 </div>
+<style>
+	*{margin:0;padding:0;list-style: none;}
+	.a1a li {display:table;}
+	.a1a li div{display: table-cell;border:1px solid #ddd;padding:10px 0;
+		vertical-align: middle;;
+	}
+	.a1a li div:first-child{width: 100px;}
+	.a1a li div:last-child{width: 200px;}
+
+	.a2a{  }
+	.a2a li{     display: flex }
+	.a2a li div{ display: flex;border:1px solid #ddd; padding:10px;}
+	.a2a li div:first-child{ width: 100px; }
+	.a2a li div:last-child{ width: 200px; }
+	.a2a li div span{ align-self: center}
+</style>
+<h1>ul display==table</h1>
+<ul class="a1a">
+	<li>
+		<div><span>123啊色发</span></div>
+		<div><span><textarea name="" ></textarea></span></div>
+	</li>
+	<li>
+		<div><span>123啊色发123啊色发生地方123啊色发生地方123啊色发生地方生地方</span></div>
+		<div><span>123啊色发生地方</span></div>
+	</li>
+</ul>
+<h1>ul display==flex</h1>
+
+<ul class="a2a">
+	<li>
+		<div><span>123啊色发</span></div>
+		<div><span><textarea name="" id="" cols="10" ></textarea></span></div>
+	</li>
+	<li>
+		<div><span>123啊色发123啊色发生地方123啊色发生地方123啊色发生地方生地方</span></div>
+		<div><span>123啊色发生地方</span></div>
+	</li>
+</ul>
+<h1>正宗table</h1>
+<style>
+	table{
+		border-collapse: collapse;
+		border:1px solid #aaa;
+		border-bottom:none;
+		width: 400px;}
+	tr{
+		border:1px solid #aaa;}
+	td{ padding:10px 5px;border:1px solid #aaa;}
+	td:first-child{
+
+		width: 100px;
+	}
+</style>
+<table style="margin-top:20px;">
+	<thead></thead>
+	<tbody>
+	<tr>
+		<td><span>带宽</span></td>
+		<td><span>0.03 元/小时 (≈0.72 元/天，≈21.6 元/月)</span></td>
+	</tr>
+	<tr>
+		<td><span>路由器</span></td>
+		<td><span>0.05 元/小时 (≈1.2 元/天，≈36.0 元/月)</span></td>
+	</tr>
+	<tr>
+		<td><span>CPU、内存</span></td>
+		<td><span>0.1198 元/小时 (≈2.8752 元/天，≈86.256 元/月)0.1198 元/小时 (≈2.8752 元/天，≈86.256 元/月)</span></td>
+	</tr>
+	<tr>
+		<td><span>描述</span></td>
+		<td><span><textarea name="" ></textarea></span></td>
+	</tr>
+
+	</tbody>
+</table>
 
 
 

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>es6</title>
+</head>
+<script src="../js/jquerymin.js"></script>
+<body>
+
+
+<script>
+
+//　a 有一个很好的方法　b如何继承？
+//  通过对象字面量创建对象
+    var one={
+        haha(){console.log('one-haha')}
+     // haha:()=>{console.log('one-haha')}//正规写法
+    }
+    var two={
+        __proto__:one,//设置此对象的原型为one，相当于继承one
+        xixi(){console.log('two-xixi')}
+    }
+    one.haha();//输出　one-haha
+
+//调用继承来的one方法
+    two.haha();//输出　one-haha
+
+////////////////////////////////////////////////////////////////
+
+    function an(){
+        this.name="阿娜"
+    }
+
+    an.prototype={//这一步在实例化的时候最先执行  执行完这一步然后在执行上边的那个this.name="阿娜"
+        name:"按",
+        age:22,
+        sex:"男",
+        info:function(){
+            console.log("我是an的info"+this.name+","+this.age)
+        }
+    };
+    function cc() {};
+    cc.prototype=an.prototype;//继承
+
+    function dd() {}
+    dd.prototype.sex=an.prototype.sex;
+
+    var ff={};
+    ff.__proto__=an.prototype;
+
+    console.log(cc.prototype.age);//22
+    console.log(dd.prototype.sex);//男
+    console.log(ff.sex);//男
+
+//利用‘ ‘ 反引号创建字符串，这其中可以包括${vraible}
+var num =Math.random();
+console.log (`your num is ${num}`);
+
+//可以定义默认的参数
+
+function sayHello2(name='dude'){
+    console.log(`Hello ${name}`);
+}
+
+sayHello2();//输出：Hello dude
+sayHello2('Wayou');//输出：Hello Wayou
+
+//promise
+// Promise 可以用来避免异步操作函数里的嵌套回调（callback hell） 问题，'.then().then()';
+//创建promise
+var price = new Promise(function(resolve, reject) {
+    // 进行一些异步或耗时操作
+    //...
+    if (true ) {/*如果成功 */
+        resolve("获取价格成功啦");
+    } else {
+        reject(Error("It broke"));
+    }
+});
+//绑定处理程序
+price.then(function(result) {
+    //promise成功的话会执行这里
+    console.log(result); // "Stuff worked!"
+}, function(err) {
+    //promise失败会执行这里
+    console.log(err); // Error: "It broke"
+});
+(function(){
+
+    //原先是这样写
+    Parse.User.logIn("user","pass", {
+        success:function(user) {
+            query.find({
+                success:function(results) {
+                    results[0].save({ key: value }, {
+                        success:function(result) {
+                            // the object was saved.
+                        },
+                        error:function(result, error) {
+                            // An error occurred.
+                        }
+                    });
+                },
+                error:function(error) {
+                    // An error occurred.
+                }
+            });
+        },
+        error:function(user, error) {
+            // An error occurred.
+        }
+    });
+
+    //promise简化后是这样的
+    Parse.User.logIn("user","pass").then(function(user) {
+        returnquery.find();
+    }).then(function(results) {
+        returnresults[0].save({ key: value });
+    }).then(function(result) {
+        // the object was saved.
+    },function(error) {
+        // there was some error.
+    });
+})()
+
+</script>
+</body>
+</html>

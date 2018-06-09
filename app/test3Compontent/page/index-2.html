@@ -1,0 +1,28 @@
+<div>
+    <h1>index-2 首页</h1>
+    <div>
+        <p>我是首页的具体内容</p>
+        <ul>
+            <li><input type="text" ng-model="aaa"></li>
+            <li><input type="text" ng-model="bbb"></li>
+            <li><input type="text" ng-model="ccc"></li>
+            <li><input type="text"></li>
+        </ul>
+        <button ng-click="letPop1Show()">点击弹出组件1</button>
+        <button ng-click="letPop2Show()">点击弹出组件2</button>
+    </div>
+    <!--组件一-->
+    <div ng-show="pop1Show" style="display: inline-block">
+        <p>{{aaa}}</p>
+        <pop-one alert-show="pop1Show" alert-show2="aaa" path-data="bbb" some-data="ccc"
+            some-data="ccc"
+        ></pop-one>
+    </div>
+    <!--组件二-->
+    <div ng-show="pop2Show" style="display: inline-block">
+        <pop-two alert-show="pop2Show"  alert-show2="aaa" path-data="bbb" need-data="ccc"
+                 need-data="ccc"
+        ></pop-two>
+    </div>
+
+</div>

@@ -1,0 +1,21 @@
+<div class="pop1" ng-show="$ctrl.alertShow">
+    <style>
+        .pop1{border:1px solid #ddd;padding:20px;width: 300px;height: 300px;overflow: auto;background: #fff}
+        .pop1 h1{font-size: 20px;margin-bottom: 20px;}
+        .pop1 ul li {margin-top: 10px;}
+    </style>
+    <div>
+        <h1>pop1 组件一 我是标题=={{$ctrl.pop1PathDataToPop2}}</h1>
+        <h1><button ng-click="$ctrl.getPop1SelfDate()">保存得到pop1私有变量</button></h1>
+        <div>
+            <p>我是组件的内容</p>
+            <ul>
+                <li><input type="text" ng-model="$ctrl.alertShow2" ng-click="$ctrl.selected($event)"></li>
+                <li><input type="text" ng-model="$ctrl.pathData"></li>
+                <li><input type="text" ng-model="$ctrl.someData"></li>
+                <li><input type="text"></li>
+            </ul>
+        </div>
+    </div>
+
+</div>

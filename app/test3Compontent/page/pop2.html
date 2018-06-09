@@ -1,0 +1,23 @@
+<div class="pop2" ng-show="$ctrl.alertShow">
+    <style>
+        .pop2{border:1px solid #ddd;padding:20px;width: 300px;height: 300px;overflow: auto;background: #fff}
+        .pop2 h1{font-size: 20px;margin-bottom: 20px;}
+        .pop2 ul li {margin-top: 10px;}
+    </style>
+    <div>
+        <h1>pop2 组件二 我是标题</h1>
+        <div>
+            <p>我是组件的内容</p>
+            <p>$on得到组件1的数据-{{$ctrl.pop1GetDate}}</p>
+            <p>factory共享数据传参得到组件1的数据-{{$ctrl.pop1GetDate2}}</p>
+            <p><button ng-click="$ctrl.removeOneData()">点我将上一行的数据去除一个</button></p>
+            <ul>
+                <li><input type="text" ng-model="$ctrl.alertShow2"></li>
+                <li><input type="text" ng-model="$ctrl.pathData"></li>
+                <li><input type="text" ng-model="$ctrl.needData"></li>
+                <li><input type="text"></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
